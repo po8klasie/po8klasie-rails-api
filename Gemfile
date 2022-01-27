@@ -8,21 +8,11 @@ ruby '3.0.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
 # user auth
 gem 'devise'
-
-# linting
-gem 'rubocop', require: false
-gem 'rubocop-rails', require: false
-
-# generating swagger documentation
-# gem 'rswag', "~> 2.3.2"
 
 # jobs
 gem 'good_job'
@@ -52,6 +42,10 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 5.0.0'
+
+  # linting
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
 
