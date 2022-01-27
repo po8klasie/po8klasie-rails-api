@@ -6,5 +6,5 @@ COPY Gemfile /code
 RUN bundle config set --local without 'development test'
 RUN bundle install 
 COPY . /code
-CMD rails s -b 0.0.0.0 -p 80 -e production
+CMD rails s -b 0.0.0.0 -p ${RAILS_PORT:-80} -e production
 
