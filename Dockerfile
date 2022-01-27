@@ -1,4 +1,4 @@
-FROM ruby:alpine
+FROM ruby:3.0.2-alpine
 RUN apk update
 RUN apk add --virtual build-dependencies build-base ruby-dev libpq postgresql-dev tzdata
 WORKDIR /code
