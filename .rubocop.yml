@@ -1,11 +1,80 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
+  TargetRubyVersion: 3.0.2
+  NewCops: enable
   Exclude:
-    - 'spec/**/*'
-    - 'db/migrate/*'
-    - 'bin/*'
-    - 'db/schema.rb'
-    - 'config/initializers/devise.rb'
-    - vendor/**/*.rb 
-    - vendor/bundle/**/*
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'vendor/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'spec/vcr/**/*'
+
+RSpec/NestedGroups:
+  Max: 6
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Rails/LinkToBlank:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+Naming/VariableNumber:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+RSpec/Capybara:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*_spec.rb'
+    - 'spec/support/**/*'
+    - 'spec/factories/*'
+    - 'config/**/*.rb'
+    - 'app/admin/**/*.rb'
+    - 'app/views/admin/**/*.arb'
+
+Style/Alias:
+  Enabled: false
+
+Style/HashLikeCase:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+  StyleGuide: https://relaxed.ruby.style/#styledocumentation
+
+Layout/FirstHashElementIndentation:
+ EnforcedStyle: consistent
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
