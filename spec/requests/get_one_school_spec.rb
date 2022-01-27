@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Schools', type: :request do
   describe 'GET /schools/get_one_school' do
-    before(:each) do
+    before do
       (1..60).each do |n|
         School.new(name: "School #{n}").save
       end
