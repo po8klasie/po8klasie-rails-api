@@ -1,0 +1,11 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'spec/**/*'
+    - 'db/migrate/*'
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'config/initializers/devise.rb'
+    - vendor/**/*.rb 
+    - vendor/bundle/**/*
