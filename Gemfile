@@ -21,7 +21,6 @@ gem 'devise'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 
-
 # generating swagger documentation
 # gem 'rswag', "~> 2.3.2"
 
