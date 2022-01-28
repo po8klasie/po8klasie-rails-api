@@ -6,7 +6,6 @@ class EnqueParallelInstitutionCreateJob < ApplicationJob
   def perform(*_args)
     if Institution.count != 0
       Rails.logger.debug 'To execute this job there can be no Institution records in the database'
-      Rails.logger.debug 'To execute this job there can be no Institution records in the database'
       return
     end
 
