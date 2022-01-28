@@ -28,9 +28,6 @@ class CreateInstitutionRecordsJob < ApplicationJob
       raw_institutions.each do |raw_institution|
         institution = {}
         institution["institution_type_id"] = raw_institution['typ']['id']
-        if institution["institution_type_id"] != institution_type_id
-          #binding.pry
-        end
         institution["name"] = raw_institution['nazwa']
         institution["rspo_institution_id"] = raw_institution['numerRspo']
         if raw_institution['statusPublicznoPrawny']['nazwa'] == 'publiczna'
