@@ -1,3 +1,4 @@
 class InstitutionType < ApplicationRecord
-    has_many: institutions
+    #create a has many relationship with the institution model
+    has_many :institutions
 end
