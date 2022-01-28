@@ -21,7 +21,7 @@ class CreateInstitutionTypesJob < ApplicationJob
 
     raw_institution_types.each do |raw_institurion_type|
       institution_type = InstitutionType.new
-      institution_type.name = raw_institurion_type['name']
+      institution_type.name = raw_institurion_type['nazwa']
       institution_type.rspo_institution_type_id = raw_institurion_type['id'].to_i
       institution_type.save
     end
