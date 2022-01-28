@@ -3,6 +3,8 @@
 require_relative 'boot'
 
 require 'rails'
+
+require 'good_job/engine'
 # Pick the frameworks you want:
 require 'active_model/railtie'
 require 'active_job/railtie'
@@ -39,6 +41,9 @@ module RailsDeviseBackend
 
     # active job
     config.active_job.queue_adapter = :good_job
+    config.good_job.execution_mode = :async
+    config.good_job.max_threads = 20
+
 
     config.active_record.legacy_connection_handling = false
     config.action_controller.per_form_csrf_tokens = true

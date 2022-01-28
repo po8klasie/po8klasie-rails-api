@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   get 'schools/get_all_schools', to: 'schools#all_schools'
   get 'schools/get_one_school', to: 'schools#one_school'
+  mount GoodJob::Engine => 'good_job'
 end

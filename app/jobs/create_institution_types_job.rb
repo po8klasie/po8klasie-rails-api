@@ -8,6 +8,7 @@ class CreateInstitutionTypesJob < ApplicationJob
   def perform
     if InstitutionType.count != 0
       Rails.logger.debug 'To execute this job there can be no InstitutionType records in the database'
+      puts 'To execute this job there can be no InstitutionType records in the database'
       return
     end
 
