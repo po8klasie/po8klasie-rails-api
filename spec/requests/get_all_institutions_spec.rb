@@ -6,7 +6,7 @@ RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/get_all_institutions' do
     before do
       type = create(:institution_type)
-      (1..60).each do |n|
+      (1..60).each do |_n|
         create(:institution, institution_type: type)
       end
     end

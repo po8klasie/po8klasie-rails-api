@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_154129) do
   create_table "institutions", force: :cascade do |t|
     t.bigint "institution_type_id"
     t.integer "rspo_institution_id"
+    t.integer "rspo_institution_type_id"
     t.string "name", null: false
     t.boolean "public", null: false
     t.decimal "latitude", precision: 10, scale: 6, null: false
@@ -84,5 +85,5 @@ ActiveRecord::Schema.define(version: 2022_01_30_154129) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "institutions", "institution_types", column: "rspo_institution_id", primary_key: "rspo_institution_type_id"
+  add_foreign_key "institutions", "institution_types", column: "rspo_institution_type_id", primary_key: "rspo_institution_type_id"
 end

@@ -8,29 +8,22 @@ class CreateInstitutionRecordsJob < ApplicationJob
 
   def perform(institution_type_id)
     page = 1
+    institution_type = InstitutionType.find_by(rspo_institution_type_id: institution_type_id)
     loop do
-      response = HTTParty.get(
-        "#{RspoApiBase}/placowki/",
-        headers: { 'accept' => 'application/json' },
-        query: { page: page, typ_podmiotu_id: institution_type_id }
-      )
-
-      raw_institutions = JSON.parse(response.body)
-
       # the records are sent in pages of 100
       break if raw_institutions == []
+
       page += 1
+
+      raw_institutions = get_raw_institutions(page, institution_type_id)
 
       batch_insert_institutions = []
       raw_institutions.each_with_object({}) do |raw_institution, institution|
-        institution[:institution_type_id] = raw_institution.dig('typ', 'id')
+        institution[:institution_type_id] = institution_type.id
         institution[:name] = raw_institution.fetch('nazwa')
+        institution[:rspo_institution_type_id] = raw_institution.dig('typ', 'id')
         institution[:rspo_institution_id] = raw_institution.fetch('numerRspo')
-        if raw_institution.dig('statusPublicznoPrawny', 'nazwa') == 'publiczna'
-          institution[:public] = true 
-        else 
-          institution[:public] = false 
-        end
+        institution[:public] = raw_institution.dig('statusPublicznoPrawny', 'nazwa') == 'publiczna'
         institution[:latitude] = raw_institution.dig('geolokalizacja', 'latitude').to_f
         institution[:longitude] = raw_institution.dig('geolokalizacja', 'longitude').to_f
         institution[:website] = raw_institution.fetch('stronaInternetowa')
@@ -48,5 +41,14 @@ class CreateInstitutionRecordsJob < ApplicationJob
       Institution.insert_all(batch_insert_institutions)
       # rubocop:enable Rails/SkipsModelValidations
     end
+  end
+
+  def get_raw_institutions(page, institution_type_id)
+    response = HTTParty.get(
+      "#{RspoApiBase}/placowki/",
+      headers: { 'accept' => 'application/json' },
+      query: { page: page, typ_podmiotu_id: institution_type_id }
+    )
+    JSON.parse(response.body)
   end
 end
