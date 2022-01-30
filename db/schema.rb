@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_092905) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
