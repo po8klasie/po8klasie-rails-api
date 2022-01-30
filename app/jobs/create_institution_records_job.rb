@@ -11,11 +11,10 @@ class CreateInstitutionRecordsJob < ApplicationJob
     institution_type = InstitutionType.find_by(rspo_institution_type_id: institution_type_id)
     loop do
       # the records are sent in pages of 100
+      raw_institutions = get_raw_institutions(page, institution_type_id)
       break if raw_institutions == []
 
       page += 1
-
-      raw_institutions = get_raw_institutions(page, institution_type_id)
 
       batch_insert_institutions = []
       raw_institutions.each_with_object({}) do |raw_institution, institution|
