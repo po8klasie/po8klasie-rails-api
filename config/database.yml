@@ -2,7 +2,7 @@ default: &default
   adapter:  postgresql
   host:     localhost
   encoding: unicode
-  pool:     20
+  pool:     10
   template: template0
   port: 5432
   password: postgres

@@ -1,32 +1,31 @@
 # frozen_string_literal: true
 
 # Controller for reading and filering the school
-class SchoolsController < ApplicationController
-  def all_schools
+class InstitutionsController < ApplicationController
+  def all_institutions
     pagination_length = extract_pagination_length
     if pagination_length == -1
       render status: :bad_request, json: { message: 'pagination_length must be a positive integer' } and return
     end
 
     page = extract_page_presence
-    schools = School.all.paginate(page: page, per_page: pagination_length)
-    render status: '200', json: schools
+    institutions = Institution.all.paginate(page: page, per_page: pagination_length)
+    render status: '200', json: institutions
   end
 
-  def one_school
-    school_id = extract_school_id
-    render status: :bad_request, json: { message: 'id must be present' } and return if school_id == -1
+  def one_institution
+    institution = extract_institution_id
+    render status: :bad_request, json: { message: 'id must be present' } and return if institution == -1
 
-    school = School.find_by(id: school_id)
-    render status: :bad_request, json: { message: 'school does not exists' } and return if school.nil?
+    institution = Institution.find_by(id: institution)
+    render status: :bad_request, json: { message: 'school does not exists' } and return if institution.nil?
 
-    render status: '200', json: school
+    render status: '200', json: institution
   end
 
-  def extract_school_id
+  def extract_institution_id
     if params['id'].present?
       params['id'].to_i
-
     else
       -1
     end

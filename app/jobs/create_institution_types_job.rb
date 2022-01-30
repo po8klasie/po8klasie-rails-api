@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'net/http'
+require 'httparty'
+require 'rspo_api_base'
 
 class CreateInstitutionTypesJob < ApplicationJob
   queue_as :default
@@ -11,18 +12,18 @@ class CreateInstitutionTypesJob < ApplicationJob
       return
     end
 
-    rspo_api_uri = URI('http://194.54.26.132/api/typ/')
-    request = Net::HTTP::Get.new(rspo_api_uri)
-    request['accept'] = 'application/json'
-    res = Net::HTTP.start(rspo_api_uri.hostname, rspo_api_uri.port) do |http|
-      http.request(request)
-    end
-    raw_institution_types = JSON.parse(res.body)
+    # there is no pagination because there are only 58 institution types
+    response = HTTParty.get(
+      "#{RspoApiBase}/typ/",
+      headers: { 'accept' => 'application/json' }
+    )
+
+    raw_institution_types = JSON.parse(response.body)
 
     raw_institution_types.each do |raw_institurion_type|
       institution_type = InstitutionType.new
-      institution_type.name = raw_institurion_type['nazwa']
-      institution_type.rspo_institution_type_id = raw_institurion_type['id'].to_i
+      institution_type.name = raw_institurion_type.fetch('nazwa')
+      institution_type.rspo_institution_type_id = raw_institurion_type.fetch('id').to_i
       institution_type.save
     end
   end

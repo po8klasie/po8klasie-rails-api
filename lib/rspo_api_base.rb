@@ -1,0 +1,1 @@
+RspoApiBase = "http://194.54.26.132/api"
