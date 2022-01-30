@@ -5,10 +5,9 @@ require 'rails_helper'
 RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/get_all_institutions' do
     before do
-      type = InstitutionType.new(name: 'Institution Type 1')
-      type.save
+      type = create(:institution_type)
       (1..60).each do |n|
-        Institution.new(name: "Institution #{n}", institution_type_id: type.id).save
+        create(:institution, institution_type: type)
       end
     end
 

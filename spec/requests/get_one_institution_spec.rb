@@ -5,16 +5,15 @@ require 'rails_helper'
 RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/get_one_institution' do
     before do
-      type = InstitutionType.new(name: 'Institution Type 1')
-      type.save
-      (1..60).each do |n|
-        Institution.new(name: "Institution #{n}", institution_type_id: type.id).save
+      type = create(:institution_type)
+      (1..60).each do |n|    
+        create(:institution, institution_type: type)
       end
     end
 
     it 'returns a institution when the id is specified' do
       get '/institutions/get_one_institution', params: { id: Institution.first.id }
-      expect(JSON.parse(response.body)['name']).to eq('Institution 1')
+      expect(JSON.parse(response.body)['name']).to eq(Institution.first.name)
     end
 
     it 'returns an error when no id is specified' do

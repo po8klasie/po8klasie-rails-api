@@ -88,6 +88,13 @@ GEM
     erubi (1.10.0)
     et-orbi (1.2.6)
       tzinfo
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     fugit (1.5.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
@@ -254,6 +261,9 @@ DEPENDENCIES
   bootsnap
   debug
   devise
+  factory_bot
+  factory_bot_rails
+  faker
   good_job
   httparty
   pg

@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_092905) do
+ActiveRecord::Schema.define(version: 2022_01_30_154129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -57,19 +56,19 @@ ActiveRecord::Schema.define(version: 2022_01_30_092905) do
   create_table "institutions", force: :cascade do |t|
     t.bigint "institution_type_id"
     t.integer "rspo_institution_id"
-    t.string "name"
-    t.boolean "public"
-    t.decimal "latitude", precision: 10, scale: 6
-    t.decimal "longitude", precision: 10, scale: 6
-    t.string "website"
+    t.string "name", null: false
+    t.boolean "public", null: false
+    t.decimal "latitude", precision: 10, scale: 6, null: false
+    t.decimal "longitude", precision: 10, scale: 6, null: false
+    t.string "website", null: false
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "city"
-    t.string "street"
-    t.string "building_no"
-    t.string "apartment_no"
-    t.string "zip_code"
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "building_no", null: false
+    t.string "apartment_no", null: false
+    t.string "zip_code", null: false
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 
@@ -85,5 +84,5 @@ ActiveRecord::Schema.define(version: 2022_01_30_092905) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "institutions", "institution_types", primary_key: "rspo_institution_type_id"
+  add_foreign_key "institutions", "institution_types", column: "rspo_institution_id", primary_key: "rspo_institution_type_id"
 end

@@ -16,6 +16,7 @@ gem 'puma', '~> 5.0'
 # user auth
 gem 'devise'
 
+
 # jobs
 gem 'good_job'
 
@@ -49,6 +50,13 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+
+  #creating test data
+  gem 'factory_bot'
+  gem 'factory_bot_rails'
+
+  #generating fake data 
+  gem 'faker'
 end
 
 group :development do
