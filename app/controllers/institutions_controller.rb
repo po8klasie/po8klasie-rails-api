@@ -6,7 +6,7 @@ class InstitutionsController < ApplicationController
 
   def all_institutions
     page = extract_page_presence
-    institutions = Institution.all.paginate(page: page, per_page: pagination_length)
+    institutions = Institution.all.paginate(page: page, per_page: @page_size)
     render status: '200', json: institutions
   end
 
@@ -35,10 +35,10 @@ class InstitutionsController < ApplicationController
   private
 
   def ensure_page_size_is_positive
-    render status: :unprocessable_entity, json: { message: '...' } unless page_size.positive?
+    render status: :unprocessable_entity, json: { message: 'invalid page size' } unless page_size.positive?
   end
 
   def page_size
-    @page_size ||= params.fetch(:page_size, DEFAULT_PAGE_SIZE).to_i
+    @page_size ||= params.fetch(:page_size, 10).to_i
   end
 end
