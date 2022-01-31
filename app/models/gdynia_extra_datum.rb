@@ -1,0 +1,2 @@
+class GdyniaExtraDatum < ApplicationRecord
+end
