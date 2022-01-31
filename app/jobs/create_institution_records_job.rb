@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
 require 'rspo_api_base'
 
 class CreateInstitutionRecordsJob < ApplicationJob
