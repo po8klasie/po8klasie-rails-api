@@ -2,12 +2,9 @@
 
 # Controller for reading and filering the school
 class InstitutionsController < ApplicationController
-  def all_institutions
-    pagination_length = extract_pagination_length
-    if pagination_length == -1
-      render status: :bad_request, json: { message: 'pagination_length must be a positive integer' } and return
-    end
+  before_action :ensure_page_size_is_positive
 
+  def all_institutions
     page = extract_page_presence
     institutions = Institution.all.paginate(page: page, per_page: pagination_length)
     render status: '200', json: institutions
@@ -31,17 +28,17 @@ class InstitutionsController < ApplicationController
     end
   end
 
-  def extract_pagination_length
-    if params['pagination_length'].present?
-      pagination_length = params['pagination_length']
-      return -1 if pagination_length.to_i < 1
-    else
-      pagination_length = '10'
-    end
-    pagination_length
-  end
-
   def extract_page_presence
     params['page'].presence || '1'
+  end
+
+  private
+
+  def ensure_page_size_is_positive
+    render status: :unprocessable_entity, json: { message: '...' } unless page_size.positive?
+  end
+
+  def page_size
+    @page_size ||= params.fetch(:page_size, DEFAULT_PAGE_SIZE).to_i
   end
 end
