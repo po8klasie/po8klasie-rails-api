@@ -1,9 +1,5 @@
-#rubocop flags this file as having an unexpected token kEND, parser error
-#rubocop:disable all
 class ApplicationService
-    self.call(*args)
-        new(*args).call
+    def self.call(*args, &block)
+      new(*args, &block).call
     end
 end
-#rubocop:enable all
-
