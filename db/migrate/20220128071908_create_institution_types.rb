@@ -8,8 +8,8 @@ class CreateInstitutionTypes < ActiveRecord::Migration[7.0]
 
     create_table :institutions do |t|
       t.belongs_to :institution_type, foreign_key: true, null: false
-      t.integer :rspo_institution_id
-      t.integer :rspo_institution_type_id
+      t.integer :rspo_institution_id, null: false
+      t.integer :rspo_institution_type_id, null: false
       t.string :name, null: false
       t.boolean :public, null: false
       t.decimal :latitude, precision: 10, scale: 6, null: false
