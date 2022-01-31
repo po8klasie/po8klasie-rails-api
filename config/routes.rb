@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
   # root "articles#index"
-  get 'schools/get_all_schools', to: 'schools#all_schools'
-  get 'schools/get_one_school', to: 'schools#one_school'
+  resources :institutions
+  
+  mount GoodJob::Engine => 'good_job'
+
 end

@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_122631) do
+ActiveRecord::Schema.define(version: 2022_01_31_083110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "gdynia_extra_data", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -45,10 +50,32 @@ ActiveRecord::Schema.define(version: 2022_01_26_122631) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
-  create_table "schools", force: :cascade do |t|
-    t.string "name"
+  create_table "institution_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "rspo_institution_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["rspo_institution_type_id"], name: "index_institution_types_on_rspo_institution_type_id", unique: true
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.bigint "institution_type_id", null: false
+    t.integer "rspo_institution_id", null: false
+    t.integer "rspo_institution_type_id", null: false
+    t.string "name", null: false
+    t.boolean "public", null: false
+    t.decimal "latitude", precision: 10, scale: 6, null: false
+    t.decimal "longitude", precision: 10, scale: 6, null: false
+    t.string "website", null: false
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "building_no", null: false
+    t.string "apartment_no", null: false
+    t.string "zip_code", null: false
+    t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,4 +90,6 @@ ActiveRecord::Schema.define(version: 2022_01_26_122631) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "institutions", "institution_types"
+  add_foreign_key "institutions", "institution_types", column: "rspo_institution_type_id", primary_key: "rspo_institution_type_id"
 end

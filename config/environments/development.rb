@@ -13,6 +13,10 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # This solves the problem of local computer not being on the list of allowed hosts
+  # when using postman or ther api client
+  config.hosts.clear
+
   # Show full error reports.
   config.consider_all_requests_local = true
 

@@ -8,6 +8,8 @@ ruby '3.0.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.0'
 
+gem 'httparty'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
@@ -47,6 +49,13 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+
+  # creating test data
+  gem 'factory_bot'
+  gem 'factory_bot_rails'
+
+  # generating fake data
+  gem 'faker'
 end
 
 group :development do
