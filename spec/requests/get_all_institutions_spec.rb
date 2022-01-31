@@ -5,7 +5,10 @@ require 'rails_helper'
 RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/get_all_institutions' do
     before do
-      create_list(:institution, 20, institution_type: type)
+      type = create(:institution_type)
+      (1..20).each do |_n|
+        create(:institution, institution_type: type)
+      end
     end
 
     it 'returns 10 institutions when no pagination_length is specified' do

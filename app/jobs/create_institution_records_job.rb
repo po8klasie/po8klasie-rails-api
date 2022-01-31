@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rspo_api_base'
-
 class CreateInstitutionRecordsJob < ApplicationJob
   queue_as :default
 
@@ -43,7 +41,7 @@ class CreateInstitutionRecordsJob < ApplicationJob
 
   def get_raw_institutions(page, institution_type_id)
     response = HTTParty.get(
-      "#{RspoApiBase}/placowki/",
+      "#{RSPO_API_BASE}/placowki/",
       headers: { 'accept' => 'application/json' },
       query: { page: page, typ_podmiotu_id: institution_type_id }
     )

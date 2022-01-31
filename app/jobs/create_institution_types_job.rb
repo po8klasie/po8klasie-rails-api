@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rspo_api_base'
-
 class CreateInstitutionTypesJob < ApplicationJob
   queue_as :default
 
@@ -13,7 +11,7 @@ class CreateInstitutionTypesJob < ApplicationJob
 
     # there is no pagination because there are only 58 institution types
     response = HTTParty.get(
-      "#{RspoApiBase}/typ/",
+      "#{RSPO_API_BASE}/typ/",
       headers: { 'accept' => 'application/json' }
     )
 
