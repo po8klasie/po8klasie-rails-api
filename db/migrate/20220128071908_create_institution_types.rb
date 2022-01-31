@@ -7,7 +7,7 @@ class CreateInstitutionTypes < ActiveRecord::Migration[7.0]
     end
 
     create_table :institutions do |t|
-      t.belongs_to :institution_type
+      t.belongs_to :institution_type, foreign_key: true, null: false
       t.integer :rspo_institution_id
       t.integer :rspo_institution_type_id
       t.string :name, null: false
