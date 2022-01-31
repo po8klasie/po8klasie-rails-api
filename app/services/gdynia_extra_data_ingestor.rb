@@ -5,7 +5,7 @@ require httparty
 class GdyniaExtraDataIngestor < ApplicationService
   def call
     response = HTTParty.get(
-      "#{GdyniaApiBase}/schools/",
+      "#{GDYNIA_API_BASE}/schools/",
       query: { format: 'json' }
     )
     JSON.parse(response.body)
