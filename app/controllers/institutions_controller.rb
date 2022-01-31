@@ -4,13 +4,13 @@
 class InstitutionsController < ApplicationController
   before_action :ensure_page_size_is_positive
 
-  def all_institutions
+  def index
     page = extract_page_presence
     institutions = Institution.all.paginate(page: page, per_page: @page_size)
     render status: '200', json: institutions
   end
 
-  def one_institution
+  def show
     institution = extract_institution_id
     render status: :bad_request, json: { message: 'id must be present' } and return if institution == -1
 
