@@ -51,17 +51,17 @@ ActiveRecord::Schema.define(version: 2022_01_31_083110) do
   end
 
   create_table "institution_types", force: :cascade do |t|
-    t.string "name"
-    t.integer "rspo_institution_type_id"
+    t.string "name", null: false
+    t.integer "rspo_institution_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["rspo_institution_type_id"], name: "index_institution_types_on_rspo_institution_type_id", unique: true
   end
 
   create_table "institutions", force: :cascade do |t|
-    t.bigint "institution_type_id"
-    t.integer "rspo_institution_id"
-    t.integer "rspo_institution_type_id"
+    t.bigint "institution_type_id", null: false
+    t.integer "rspo_institution_id", null: false
+    t.integer "rspo_institution_type_id", null: false
     t.string "name", null: false
     t.boolean "public", null: false
     t.decimal "latitude", precision: 10, scale: 6, null: false
@@ -90,5 +90,6 @@ ActiveRecord::Schema.define(version: 2022_01_31_083110) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "institutions", "institution_types"
   add_foreign_key "institutions", "institution_types", column: "rspo_institution_type_id", primary_key: "rspo_institution_type_id"
 end
