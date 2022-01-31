@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :institution do
-    name { Faker::FunnyName.name }
+    sequence(:name) { |n| "LO #{n}" }
     public { Faker::Boolean.boolean }
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
