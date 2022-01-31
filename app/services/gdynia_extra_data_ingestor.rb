@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require gdynia_api_base
 require httparty
 
 class GdyniaExtraDataIngestor < ApplicationService
