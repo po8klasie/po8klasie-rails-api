@@ -12,8 +12,8 @@ class CreateInstitutionTypes < ActiveRecord::Migration[7.0]
       t.integer :rspo_institution_type_id
       t.string :name, null: false
       t.boolean :public, null: false
-      t.decimal :latitude, precision: 10, :scale=>6, null: false
-      t.decimal :longitude, precision: 10, :scale=>6, null: false
+      t.decimal :latitude, precision: 10, scale: 6, null: false
+      t.decimal :longitude, precision: 10, scale: 6, null: false
       t.string :website, null: false 
       t.string :email
       t.string :address  
