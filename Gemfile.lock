@@ -1,3 +1,22 @@
+GIT
+  remote: https://github.com/rswag/rswag.git
+  revision: b971f299c12f87cd2ca579d7c95d1ce942b767cc
+  branch: master
+  specs:
+    rswag (0.0.0)
+      rswag-api (= 0.0.0)
+      rswag-specs (= 0.0.0)
+      rswag-ui (= 0.0.0)
+    rswag-api (0.0.0)
+      railties (>= 3.1, < 7.1)
+    rswag-specs (0.0.0)
+      activesupport (>= 3.1, < 7.1)
+      json-schema (~> 2.2)
+      railties (>= 3.1, < 7.1)
+    rswag-ui (0.0.0)
+      actionpack (>= 3.1, < 7.1)
+      railties (>= 3.1, < 7.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,6 +85,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     bcrypt (3.1.16)
     bootsnap (1.10.2)
@@ -118,6 +139,8 @@ GEM
     io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -160,6 +183,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    public_suffix (4.0.6)
     puma (5.6.1)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -272,6 +296,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.0)
   rspec-rails (~> 5.0.0)
+  rswag!
   rubocop
   rubocop-rails
   rubocop-rspec

@@ -1,0 +1,32 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/institutions":
+    get:
+      summary: Retrieves all institutions
+      tags:
+      - Institutions
+      parameters:
+      - name: page
+        in: query
+        default: '1'
+        description: Page number
+        schema:
+          type: string
+      - name: page_size
+        in: query
+        default: '10'
+        description: Page size
+        schema:
+          type: string
+      responses:
+        '200':
+          description: blog found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

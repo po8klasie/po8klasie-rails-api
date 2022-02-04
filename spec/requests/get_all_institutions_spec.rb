@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+
 RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/index' do
     before do
