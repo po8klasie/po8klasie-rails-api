@@ -5,7 +5,7 @@ class CreateGdyniaExtraDataRecordsJob < ApplicationJob
 
   def perform
     # getting the raw data from the Gdynia API
-    raw_data = GdyniaExtraDataIngestor.new.call
+    raw_data = GdyniaExtraDataClient.new.raw_schools
     # mapping the raw data to the database
     GdyniaExtraDataMapper.new.call(raw_data)
   end

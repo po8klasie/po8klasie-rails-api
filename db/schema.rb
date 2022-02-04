@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(version: 2022_02_04_083125) do
     t.string "building_no", null: false
     t.string "apartment_no", null: false
     t.string "zip_code", null: false
-    t.integer "integration_classes"
-    t.integer "classrooms"
-    t.integer "sport_facilities"
-    t.integer "working_time"
-    t.integer "students_per_teacher"
+    t.float "integration_classes"
+    t.float "classrooms"
+    t.float "sport_facilities"
+    t.float "working_time"
+    t.float "students_per_teacher"
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 

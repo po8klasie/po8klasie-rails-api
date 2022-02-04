@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-
 RSpec.describe 'Institutions', type: :request do
   describe 'GET /institutions/<id>' do
     before do

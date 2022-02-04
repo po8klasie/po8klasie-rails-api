@@ -24,7 +24,7 @@ require 'rails_helper'
 # add_column :institutions, :studerns_per_teacher, :integer
 
 RSpec.describe 'GdyniaExtraDataMapper', type: :service do
-  describe 'when using the call function' do
+  describe '#call' do
     it 'saves the extra data from the GdyniaApi to the database' do
       institution_type = create(:institution_type)
       institution_created = create(:institution, institution_type: institution_type)

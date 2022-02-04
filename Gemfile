@@ -22,8 +22,8 @@ gem 'good_job'
 # database
 gem 'pg'
 
-#allowing users to view swagger docs
-#so far rubygems version is not compatible with rails rails 7.x
+# allowing users to view swagger docs
+# so far rubygems version is not compatible with rails rails 7.x
 gem 'rswag', git: 'https://github.com/rswag/rswag.git', branch: 'master'
 
 # pagination
