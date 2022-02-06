@@ -11,9 +11,9 @@ name: "Ruby on Rails CI"
 version: "1.1"
 on:
   push:
-    branches: [ '**' ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ '**' ]
+    branches: [ '*' ]
 jobs:
   test:
     runs-on: ubuntu-latest
