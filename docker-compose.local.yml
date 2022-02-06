@@ -1,0 +1,36 @@
+# Do not use this file in production
+# See github.com/po8klasie/infra for info on how to set up prod-ready deployment
+version: '3.1'
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "${PORT:-3000}:3000"
+    networks:
+      - po8klasie
+    volumes:
+      - ./:/opt/app
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres:10.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - po8klasie
+  redis:
+    image: redis:4.0.8-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - po8klasie
+volumes:
+  postgres_data:
+  redis_data:
+networks:
+  po8klasie:
