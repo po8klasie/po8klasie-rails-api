@@ -1,4 +1,4 @@
-FROM ruby:3.0.2-alpine
+FROM ruby:3.1.0-alpine
 WORKDIR /code
 RUN bundle config set --local without 'development test'
 RUN apk update
