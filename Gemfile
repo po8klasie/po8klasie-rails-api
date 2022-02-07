@@ -17,7 +17,7 @@ gem 'puma', '~> 5.0'
 gem 'devise'
 
 # jobs
-gem 'good_job'
+gem 'good_job', '~> 2.9.5'
 
 # database
 gem 'pg'
@@ -41,10 +41,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'rspec-rails', '~> 5.0.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
 
   # linting
   gem 'rubocop', require: false

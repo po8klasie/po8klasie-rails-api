@@ -89,8 +89,6 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     bcrypt (3.1.16)
-    bootsnap (1.10.3)
-      msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
@@ -120,7 +118,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    good_job (2.9.4)
+    good_job (2.9.5)
       activejob (>= 5.2.0)
       activerecord (>= 5.2.0)
       concurrent-ruby (>= 1.0.2)
@@ -152,7 +150,6 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    msgpack (1.4.4)
     multi_xml (0.6.0)
     net-imap (0.2.3)
       digest
@@ -276,13 +273,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bootsnap
   debug
   devise
   factory_bot
   factory_bot_rails
   faker
-  good_job
+  good_job (~> 2.9.5)
   httparty
   pg
   puma (~> 5.0)
