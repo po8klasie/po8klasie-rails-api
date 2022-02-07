@@ -1,0 +1,12 @@
+name: Clear cloudflare cache 
+
+jobs:
+  clear-cloudflare-cache:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clear cache
+      uses: jakejarvis/cloudflare-purge-action@v0.3.0
+      env:
+        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
