@@ -1,5 +1,5 @@
 name: Clear cloudflare cache 
-
+on: workflow_dispatch
 jobs:
   clear-cloudflare-cache:
     timeout-minutes: 30
