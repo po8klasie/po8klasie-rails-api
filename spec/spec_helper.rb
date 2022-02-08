@@ -14,6 +14,7 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 require 'debug'
+require 'webmock/rspec'
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

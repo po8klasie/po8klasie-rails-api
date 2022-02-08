@@ -3,12 +3,13 @@
 require 'httparty'
 
 class GdyniaExtraDataClient
-  def raw_schools(provided_data = nil)
-    raw_data = if provided_data.nil?
-                 data_from_api
-               else
-                 provided_data
-               end
+  def raw_schools()
+    response = HTTParty.get(
+      "#{GDYNIA_API_BASE}/schools/",
+      query: { format: 'json' },
+      timeout: 10
+    )
+    raw_data = JSON.parse(response.body)
 
     raw_data.map do |raw_record|
       # We are interested in the following fields: "w51", "wx2", "wx3", "w68", "w88"
@@ -21,14 +22,5 @@ class GdyniaExtraDataClient
         'w88' => raw_record.fetch('w88').to_f
       }
     end
-  end
-
-  def data_from_api
-    response = HTTParty.get(
-      "#{GDYNIA_API_BASE}/schools/",
-      query: { format: 'json' },
-      timeout: 10
-    )
-    JSON.parse(response.body)
   end
 end

@@ -62,3 +62,8 @@ group :development, :test do
   # generating fake data
   gem 'faker'
 end
+
+group :test do
+  #mocking external apis
+  gem "webmock"
+end
