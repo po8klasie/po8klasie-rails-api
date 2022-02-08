@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'GdyniaExtraDataClient', type: :service do
+RSpec.describe 'GdyniaExtraDataClient' do
   describe '#get_raw_schools' do
     it 'returns the raw data from the Gdynia API' do
       raw_data = GdyniaExtraDataClient.new.raw_schools
