@@ -64,6 +64,6 @@ group :development, :test do
 end
 
 group :test do
-  #mocking external apis
-  gem "webmock"
+  # mocking external apis
+  gem 'webmock'
 end

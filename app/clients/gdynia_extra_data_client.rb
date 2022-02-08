@@ -3,7 +3,7 @@
 require 'httparty'
 
 class GdyniaExtraDataClient
-  def raw_schools()
+  def raw_schools
     response = HTTParty.get(
       "#{GDYNIA_API_BASE}/schools/",
       query: { format: 'json' },

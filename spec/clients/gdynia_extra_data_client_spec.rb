@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'GdyniaExtraDataClient' do
   describe '#get_raw_schools' do
-    #We are disabling webmock because we want to connect to the real api
+    # We are disabling webmock because we want to connect to the real api
 
     it 'returns the raw data from the Gdynia API' do
       WebMock.allow_net_connect!
@@ -38,16 +38,17 @@ RSpec.describe 'GdyniaExtraDataClient' do
         }
       ]
 
-      stub_request(:get, "https://edukacja.gdynia.pl/api/schools/?format=json").
-         with(
-           headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent'=>'Ruby'
-           }).
-         to_return(status: 200, body: mock_response_body.to_json, headers: {})
+      stub_request(:get, 'https://edukacja.gdynia.pl/api/schools/?format=json')
+        .with(
+          headers: {
+            'Accept' => '*/*',
+            'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent' => 'Ruby'
+          }
+        )
+        .to_return(status: 200, body: mock_response_body.to_json, headers: {})
 
-      raw_data = GdyniaExtraDataClient.new.raw_schools()
+      raw_data = GdyniaExtraDataClient.new.raw_schools
 
       expect(raw_data[0]['w51']).to eq(10)
       expect(raw_data[0]['wx2']).to eq(20)
