@@ -1,1 +1,3 @@
 --require spec_helper
+RSpec/EmptyExampleGroup:
+    Enabled: false
