@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
-# this file is entirely related to rswag which is on hold for now
-#rubocop:disable all
-=begin
+# frozen_string_literal: tru
 require 'swagger_helper'
 
 describe 'Institutions API' do
@@ -22,5 +18,3 @@ describe 'Institutions API' do
     end
   end
 end
-=end
-#rubocop:enable all
