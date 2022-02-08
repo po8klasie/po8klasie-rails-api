@@ -35,16 +35,16 @@ RSpec.describe 'GdyniaExtraDataClient' do
 
       raw_data = GdyniaExtraDataClient.new.raw_schools(mock_data)
 
-      expect(raw_data[0]['w51']).to eq(10.0)
-      expect(raw_data[0]['wx2']).to eq(20.0)
-      expect(raw_data[0]['wx3']).to eq(30.0)
+      expect(raw_data[0]['w51']).to eq(10)
+      expect(raw_data[0]['wx2']).to eq(20)
+      expect(raw_data[0]['wx3']).to eq(30)
       expect(raw_data[0]['w68']).to eq(40.0)
       expect(raw_data[0]['w88']).to eq(50.0)
       expect(raw_data[0]['rspo']).to eq(institution_1.rspo_institution_id)
 
-      expect(raw_data[1]['w51']).to eq(101.0)
-      expect(raw_data[1]['wx2']).to eq(201.0)
-      expect(raw_data[1]['wx3']).to eq(301.0)
+      expect(raw_data[1]['w51']).to eq(101)
+      expect(raw_data[1]['wx2']).to eq(201)
+      expect(raw_data[1]['wx3']).to eq(301)
       expect(raw_data[1]['w68']).to eq(401.0)
       expect(raw_data[1]['w88']).to eq(501.0)
       expect(raw_data[1]['rspo']).to eq(institution_2.rspo_institution_id)
