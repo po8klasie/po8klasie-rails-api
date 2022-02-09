@@ -50,7 +50,6 @@ RSpec.configure do |config|
     WebMock.disable_net_connect!
   end
 
-
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 

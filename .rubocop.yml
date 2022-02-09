@@ -43,7 +43,7 @@ RSpec/Capybara:
   Enabled: false
 
 RSpec/EmptyExampleGroup:
-  Eclude:
+  Exclude:
     - 'spec/integration/*.rb'
 Metrics/BlockLength:
   Exclude:
