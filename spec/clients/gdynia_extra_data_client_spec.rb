@@ -6,12 +6,10 @@ RSpec.describe 'GdyniaExtraDataClient' do
   describe '#raw_schools' do
     # We are disabling webmock because we want to connect to the real api
 
-    it 'returns the raw data from the Gdynia API' do
-      WebMock.allow_net_connect!
+    it 'returns the raw data from the Gdynia API', :allow_net_connect do
       raw_data = GdyniaExtraDataClient.new.raw_schools
       expect(raw_data).to be_a(Array)
       expect(raw_data.size).to be > 0
-      WebMock.disable_net_connect!
     end
 
     it 'correctly processes mock data' do
