@@ -21,6 +21,8 @@ gem 'good_job', '~> 2.9.5'
 
 # database
 gem 'pg'
+# postgres full text search
+gem 'pg_search'
 
 # allowing users to view swagger docs
 # so far rubygems version is not compatible with rails rails 7.x
