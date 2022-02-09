@@ -16,7 +16,9 @@ class CreateInstitutionRecordsJob < ApplicationJob
       page += 1
 
       batch_insert_institutions = []
-      raw_institutions.each_with_object({}) do |raw_institution, institution|
+      raw_institutions.each do |raw_institution|
+        institution = {}
+
         institution[:institution_type_id] = institution_type.id
         institution[:name] = raw_institution.fetch('nazwa')
         institution[:rspo_institution_type_id] = raw_institution.dig('typ', 'id')
@@ -31,7 +33,6 @@ class CreateInstitutionRecordsJob < ApplicationJob
         institution[:building_no] = raw_institution.fetch('adresDoKorespondecjiNumerBudynku')
         institution[:apartment_no] = raw_institution.fetch('adresDoKorespondecjiNumerLokalu')
         institution[:zip_code] = raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
-
         batch_insert_institutions << institution
       end
 
