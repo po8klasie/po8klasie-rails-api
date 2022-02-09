@@ -15,10 +15,8 @@ class CreateInstitutionRecordsJob < ApplicationJob
 
       page += 1
 
-      binding.pry
-
       batch_insert_institutions = []
-      raw_institutions.each() do |raw_institution|
+      raw_institutions.each do |raw_institution|
         institution = {}
 
         institution[:institution_type_id] = institution_type.id
@@ -36,8 +34,6 @@ class CreateInstitutionRecordsJob < ApplicationJob
         institution[:apartment_no] = raw_institution.fetch('adresDoKorespondecjiNumerLokalu')
         institution[:zip_code] = raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
         batch_insert_institutions << institution
-
-        binding.pry
       end
 
       # rubocop:disable Rails/SkipsModelValidations
