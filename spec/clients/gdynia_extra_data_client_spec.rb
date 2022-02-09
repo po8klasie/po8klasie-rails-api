@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'GdyniaExtraDataClient' do
-  describe '#get_raw_schools' do
+  describe '#raw_schools' do
     # We are disabling webmock because we want to connect to the real api
 
     it 'returns the raw data from the Gdynia API' do
