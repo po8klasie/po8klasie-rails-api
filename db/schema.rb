@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_02_12_134157) do
-=======
-ActiveRecord::Schema.define(version: 2022_02_04_083125) do
->>>>>>> gdynia data ingestion (#10)
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -84,12 +80,9 @@ ActiveRecord::Schema.define(version: 2022_02_04_083125) do
     t.integer "sport_facilities"
     t.float "working_time"
     t.float "students_per_teacher"
-<<<<<<< HEAD
     t.string "powiat", null: false
     t.string "gmina", null: false
     t.string "miejscowosc", null: false
-=======
->>>>>>> gdynia data ingestion (#10)
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 

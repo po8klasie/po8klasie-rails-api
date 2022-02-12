@@ -30,10 +30,14 @@ class CreateInstitutionRecordsJob < ApplicationJob
           street: raw_institution.fetch('adresDoKorespondecjiUlica'),
           building_no: raw_institution.fetch('adresDoKorespondecjiNumerBudynku'),
           apartment_no: raw_institution.fetch('adresDoKorespondecjiNumerLokalu'),
+<<<<<<< HEAD
           zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy'),
           powiat: raw_institution.fetch('powiat'),
           gmina: raw_institution.fetch('gmina'),
           miejscowosc: raw_institution.fetch('miejscowosc')
+=======
+          zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
+>>>>>>> 24d25fd909a257f2a5fec964295e3a486e4a07db
         }
       end
       # rubocop:disable Rails/SkipsModelValidations
