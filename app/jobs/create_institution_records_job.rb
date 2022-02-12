@@ -15,27 +15,25 @@ class CreateInstitutionRecordsJob < ApplicationJob
 
       page += 1
 
-      batch_insert_institutions = []
-      raw_institutions.each do |raw_institution|
-        institution = {}
 
-        institution[:institution_type_id] = institution_type.id
-        institution[:name] = raw_institution.fetch('nazwa')
-        institution[:rspo_institution_type_id] = raw_institution.dig('typ', 'id')
-        institution[:rspo_institution_id] = raw_institution.fetch('numerRspo')
-        institution[:public] = raw_institution.dig('statusPublicznoPrawny', 'nazwa') == 'publiczna'
-        institution[:latitude] = raw_institution.dig('geolokalizacja', 'latitude').to_f
-        institution[:longitude] = raw_institution.dig('geolokalizacja', 'longitude').to_f
-        institution[:website] = raw_institution.fetch('stronaInternetowa')
-        institution[:email] = raw_institution.fetch('email')
-        institution[:city] = raw_institution.fetch('adresDoKorespondecjiMiejscowosc')
-        institution[:street] = raw_institution.fetch('adresDoKorespondecjiUlica')
-        institution[:building_no] = raw_institution.fetch('adresDoKorespondecjiNumerBudynku')
-        institution[:apartment_no] = raw_institution.fetch('adresDoKorespondecjiNumerLokalu')
-        institution[:zip_code] = raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
-        batch_insert_institutions << institution
+      batch_insert_institutions = raw_institutions.map do |raw_institution|
+        {
+          institution_type_id: institution_type.id,
+          name: raw_institution.fetch('nazwa'),
+          rspo_institution_type_id: raw_institution.dig('typ', 'id'),
+          rspo_institution_id: raw_institution.fetch('numerRspo'),
+          public: raw_institution.dig('statusPublicznoPrawny', 'nazwa') == 'publiczna',
+          latitude: raw_institution.dig('geolokalizacja', 'latitude').to_f,
+          longitude: raw_institution.dig('geolokalizacja', 'longitude').to_f,
+          website: raw_institution.fetch('stronaInternetowa'),
+          email: raw_institution.fetch('email'),
+          city: raw_institution.fetch('adresDoKorespondecjiMiejscowosc'),
+          street: raw_institution.fetch('adresDoKorespondecjiUlica'),
+          building_no: raw_institution.fetch('adresDoKorespondecjiNumerBudynku'),
+          apartment_no: raw_institution.fetch('adresDoKorespondecjiNumerLokalu'),
+          zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
+        }
       end
-
       # rubocop:disable Rails/SkipsModelValidations
       Institution.insert_all(batch_insert_institutions)
       # rubocop:enable Rails/SkipsModelValidations
