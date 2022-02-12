@@ -33,28 +33,6 @@ class CreateInstitutionRecordsJob < ApplicationJob
           zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
         }
       end
-
-      batch_insert_institutions = []
-      raw_institutions.each do |raw_institution|
-        institution = {}
-
-        institution[:institution_type_id] = institution_type.id
-        institution[:name] = raw_institution.fetch('nazwa')
-        institution[:rspo_institution_type_id] = raw_institution.dig('typ', 'id')
-        institution[:rspo_institution_id] = raw_institution.fetch('numerRspo')
-        institution[:public] = raw_institution.dig('statusPublicznoPrawny', 'nazwa') == 'publiczna'
-        institution[:latitude] = raw_institution.dig('geolokalizacja', 'latitude').to_f
-        institution[:longitude] = raw_institution.dig('geolokalizacja', 'longitude').to_f
-        institution[:website] = raw_institution.fetch('stronaInternetowa')
-        institution[:email] = raw_institution.fetch('email')
-        institution[:city] = raw_institution.fetch('adresDoKorespondecjiMiejscowosc')
-        institution[:street] = raw_institution.fetch('adresDoKorespondecjiUlica')
-        institution[:building_no] = raw_institution.fetch('adresDoKorespondecjiNumerBudynku')
-        institution[:apartment_no] = raw_institution.fetch('adresDoKorespondecjiNumerLokalu')
-        institution[:zip_code] = raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
-        batch_insert_institutions << institution
-      end
-
       # rubocop:disable Rails/SkipsModelValidations
       Institution.insert_all(batch_insert_institutions)
       # rubocop:enable Rails/SkipsModelValidations
