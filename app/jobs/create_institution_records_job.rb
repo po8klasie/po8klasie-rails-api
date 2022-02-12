@@ -15,7 +15,6 @@ class CreateInstitutionRecordsJob < ApplicationJob
 
       page += 1
 
-
       batch_insert_institutions = raw_institutions.map do |raw_institution|
         {
           institution_type_id: institution_type.id,
