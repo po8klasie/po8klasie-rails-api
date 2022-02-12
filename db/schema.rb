@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_083110) do
+ActiveRecord::Schema.define(version: 2022_02_04_083125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(version: 2022_01_31_083110) do
     t.string "building_no", null: false
     t.string "apartment_no", null: false
     t.string "zip_code", null: false
+    t.integer "integration_classes"
+    t.integer "classrooms"
+    t.integer "sport_facilities"
+    t.float "working_time"
+    t.float "students_per_teacher"
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 

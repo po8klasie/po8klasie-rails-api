@@ -42,6 +42,9 @@ Naming/VariableNumber:
 RSpec/Capybara:
   Enabled: false
 
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/integration/*.rb'
 Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
