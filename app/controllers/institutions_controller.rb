@@ -2,14 +2,14 @@
 
 # Controller for reading and filering the school
 class InstitutionsController < ApplicationController
-  before_action :ensure_page_size_is_positive, :pg_area_querry, :pg_name_querry, :public_school, :school_rspo_type_ids
+  before_action :ensure_page_size_is_positive, :area_query, :name_query, :public_school, :school_rspo_type_ids
 
   def index
     #rubocop:disable all
     page = extract_page_presence
     institutions = Institution.all
-    institutions = institutions.search_by_area(@pg_area_querry) if !@pg_area_querry.nil?
-    institutions = institutions.search_by_name(@pg_name_querry) if !@pg_name_querry.nil?
+    institutions = institutions.search_by_area(@area_query) if !@area_query.nil?
+    institutions = institutions.search_by_name(@name_query) if !@name_query.nil?
     institutions = institutions.where(rspo_institution_type_id: @school_rspo_type_ids) if !@school_rspo_type_ids.nil? 
     institutions = institutions.where(public: @public_school) if !@public_school.nil?
 
@@ -45,14 +45,14 @@ class InstitutionsController < ApplicationController
     render status: :unprocessable_entity, json: { message: 'invalid page size' } unless page_size.positive?
   end
 
-  def pg_name_querry
+  def name_query
     # a string
-    @pg_name_querry ||= params.fetch(:pg_name_querry, nil)
+    @name_query ||= params.fetch(:name_query, nil)
   end
 
-  def pg_area_querry
+  def area_query
     # a string
-    @pg_area_querry ||= params.fetch(:pg_area_querry, nil)
+    @area_query ||= params.fetch(:area_query, nil)
   end
 
   def page_size

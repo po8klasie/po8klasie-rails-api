@@ -8,10 +8,10 @@ parameters:
 page:string, optional, default='1'
 it specifies the page number to be used for pagination
 
-pg_name_querry:string, optional, default=null
+name_query:string, optional, default=null
 it specifies the full name of the institution to be used for filtering
 
-pg_area_querry:string "powiat gmina miejscowosc", optional, default=null, example: "Żywiec", "Warszawa"
+area_query:string "powiat gmina miejscowosc", optional, default=null, example: "Żywiec", "Warszawa"
 it specifies the area, the search is performed on fields of powiat gmina miejscowosc
 
 public_school:bool, optional, default=null
