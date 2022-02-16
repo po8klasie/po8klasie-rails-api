@@ -5,7 +5,7 @@ GET /institutions
 returns a paginated list of institutions
 
 parameters:
-page:string, optional, default='1'
+page:int, optional, default='1'
 it specifies the page number to be used for pagination
 
 name_query:string, optional, default=null
