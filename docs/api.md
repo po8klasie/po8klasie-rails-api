@@ -14,7 +14,7 @@ it specifies the full name of the institution to be used for filtering
 pg_area_querry:string "powiat gmina miejscowosc", optional, default=null, example: "Żywiec", "Warszawa"
 it specifies the area, the search is performed on fields of powiat gmina miejscowosc
 
-school_status:bool, optional, default=null
+public_school:bool, optional, default=null
 it specifies whether schools have to be public or not public 
 
 school_rspo_type_ids: array of ints, optional, default=null

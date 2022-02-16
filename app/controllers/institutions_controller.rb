@@ -2,7 +2,7 @@
 
 # Controller for reading and filering the school
 class InstitutionsController < ApplicationController
-  before_action :ensure_page_size_is_positive, :pg_area_querry, :pg_name_querry, :school_status, :school_rspo_type_ids
+  before_action :ensure_page_size_is_positive, :pg_area_querry, :pg_name_querry, :public_school, :school_rspo_type_ids
 
   def index
     #rubocop:disable all
@@ -11,7 +11,7 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_area(@pg_area_querry) if !@pg_area_querry.nil?
     institutions = institutions.search_by_name(@pg_name_querry) if !@pg_name_querry.nil?
     institutions = institutions.where(rspo_institution_type_id: @school_rspo_type_ids) if !@school_rspo_type_ids.nil? 
-    institutions = institutions.where(public: @school_status) if !@school_status.nil?
+    institutions = institutions.where(public: @public_school) if !@public_school.nil?
 
     render status: '200', json: institutions.paginate(page: page, per_page: @page_size)
     #rubocop:enable all
@@ -60,9 +60,9 @@ class InstitutionsController < ApplicationController
     @page_size ||= params.fetch(:page_size, 10).to_i
   end
 
-  def school_status
+  def public_school
     # boolean value
-    @school_status ||= params.fetch(:school_status, nil)
+    @public_school ||= params.fetch(:public_school, nil)
   end
 
   def school_rspo_type_ids
