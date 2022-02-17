@@ -1,7 +1,7 @@
 name: Test with Dockerfiles
-
-on: [push]
-
+on:
+  push:
+    branches: [ '*' ]
 jobs:
   test:
     env:
