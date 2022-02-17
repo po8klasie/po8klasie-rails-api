@@ -17,5 +17,5 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: workspace_test
+      POSTGRES_DB: test
       POSTGRES_USER: postgres
