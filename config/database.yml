@@ -1,21 +1,25 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: database
   user: postgres
   password: postgres
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: workspace_development
+  host: localhost
+  database: development
 
 test:
   <<: *default
-  database: workspace_test
+  #The host for the database is database in compose networking in ci, locally you have
+  #to set the DATABASE_HOST env variable to localhost
+  host: <%= ENV.fetch("DATABASE_HOST") { "database" } %>
+  database: test
 
 production:
   <<: *default
+  host: production_database_address
   database: workspace_production
   username: workspace
   password: <%= ENV['WORKSPACE_DATABASE_PASSWORD'] %>
