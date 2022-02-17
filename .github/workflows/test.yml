@@ -74,5 +74,3 @@ jobs:
         mv /tmp/.buildx-main-cache-new /tmp/.buildx-main-cache
         rm -rf /tmp/.buildx-postgres-cache
         mv /tmp/.buildx-postgres-cache-new /tmp/.buildx-postgres-cache
-        rm -rf /tmp/.buildx-chrome-cache
-        mv /tmp/.buildx-chrome-cache-new /tmp/.buildx-chrome-cache
