@@ -8,6 +8,6 @@ class Institution < ApplicationRecord
   pg_search_scope :search_by_area, against: %i[powiat gmina miejscowosc]
 
   def address
-    "#{city} #{street} #{building_no}/#{apartment_no} #{zip_code}"
+    "#{miejscowosc} #{street} #{building_no}/#{apartment_no} #{zip_code}"
   end
 end

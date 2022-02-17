@@ -8,7 +8,6 @@ FactoryBot.define do
     longitude { Faker::Address.longitude }
     website { Faker::Internet.url }
     email { Faker::Internet.email }
-    city { Faker::Address.city }
     street { Faker::Address.street_name }
     building_no { Faker::Address.building_number }
     apartment_no { Faker::Address.secondary_address }
