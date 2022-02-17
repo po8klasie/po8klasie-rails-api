@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  test:
+    image: ${TEST_IMAGE_TAG:-test}
+    depends_on: 
+      - database
+    environment:
+      PARALLEL_WORKERS: 1 # makes tests run sequentially instead of simultaneously
+    command: >
+      bash -c "bin/rake spec"
+      
+  database:
+    image: ${DB_IMAGE_TAG:-db}
+    restart: unless-stopped
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
