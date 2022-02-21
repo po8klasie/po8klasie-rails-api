@@ -31,7 +31,7 @@ class InstitutionsController < ApplicationController
   end
 
   def extract_page_presence
-    @page = params.fetch(:page, "1").to_i
+    @page = params.fetch(:page, '1').to_i
     render status: :bad_request, json: { message: 'page must be greater than 0' } if @page < 1
   end
 
