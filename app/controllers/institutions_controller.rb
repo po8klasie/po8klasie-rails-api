@@ -6,8 +6,6 @@ class InstitutionsController < ApplicationController
                 :public_school, :school_rspo_type_ids, only: [:index]
   before_action :institution_id, only: [:show]
   def index
-    render status: :bad_request, json: { message: @error_message } and return unless @error_message.nil?
-
     institutions = Institution.all
     institutions = institutions.search_by_area(@area_query) unless @area_query.nil?
     institutions = institutions.search_by_name(@name_query) unless @name_query.nil?
@@ -33,8 +31,8 @@ class InstitutionsController < ApplicationController
   end
 
   def extract_page_presence
-    @page = params.fetch(:page, 1)
-    @error_message = 'page must be greater than 0' if @page.to_i < 1
+    @page = params.fetch(:page, "1").to_i
+    render status: :bad_request, json: { message: 'page must be greater than 0' } if @page < 1
   end
 
   def ensure_page_size_is_positive
