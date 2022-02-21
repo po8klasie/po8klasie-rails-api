@@ -73,9 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_12_134157) do
     t.integer "sport_facilities"
     t.float "working_time"
     t.float "students_per_teacher"
-    t.string "powiat", null: false
-    t.string "gmina", null: false
-    t.string "miejscowosc", null: false
+    t.string "county", null: false
+    t.string "municipality", null: false
+    t.string "town", null: false
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 

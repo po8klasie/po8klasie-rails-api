@@ -15,8 +15,8 @@ FactoryBot.define do
     institution_type_id { institution_type.id }
     rspo_institution_id { Faker::Number.number(digits: 5) }
     rspo_institution_type_id { institution_type.rspo_institution_type_id }
-    powiat { Faker::Address.state }
-    gmina { Faker::Address.city }
-    miejscowosc { Faker::Address.city }
+    county { Faker::Address.state }
+    municipality { Faker::Address.city }
+    town { Faker::Address.city }
   end
 end
