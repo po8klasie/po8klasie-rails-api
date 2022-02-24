@@ -47,7 +47,7 @@ jobs:
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
         tags: ${{ steps.tags.outputs.tagged_image }}
 
-    - name: Run Tests
+    - name: Run linter and tests
       env:
         TESTS_IMAGE_TAG: ${{ steps.tags.outputs.tagged_image }}
       run: |
