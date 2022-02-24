@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   linter-and-tests:
-    image: po8klasie-rails-api:${TESTS_IMAGE_TAG}
+    image: ${IMAGE_FOR_TESTS}
     depends_on: 
       - database
     environment:
