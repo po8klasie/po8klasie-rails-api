@@ -4,7 +4,7 @@ services:
   linter-and-tests:
     image: ${IMAGE_FOR_TESTS}
     depends_on: 
-      - database
+      - database  
     environment:
       PARALLEL_WORKERS: 1 # makes tests run sequentially instead of simultaneously
     networks:
