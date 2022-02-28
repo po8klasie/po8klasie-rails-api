@@ -9,7 +9,7 @@ services:
       PARALLEL_WORKERS: 1 # makes tests run sequentially instead of simultaneously
     networks:
       - po8klasie
-    command: [ "sh /code/.ci/entrypoint.tests.sh" ]
+    command: [ "sh", "/code/.ci/entrypoint.tests.sh" ]
       
   database:
     image: postgres:13
