@@ -5,8 +5,20 @@ GET /institutions
 returns a paginated list of institutions
 
 parameters:
-page:string, optional, default='1'
+page:int, optional, default='1'
 it specifies the page number to be used for pagination
+
+name_query:string, optional, default=null
+it specifies the full name of the institution to be used for filtering
+
+area_query:string "powiat gmina miejscowosc", optional, default=null, example: "Żywiec", "Warszawa"
+it specifies the area, the search is performed on fields of county municipality town
+
+public_school:bool, optional, default=null
+it specifies whether schools have to be public or not public 
+
+school_rspo_type_ids: array of ints, optional, default=null
+it specifies the types of schools to be considered
 
 page_size:string, optional, default='10'
 it specifies the pagination size.

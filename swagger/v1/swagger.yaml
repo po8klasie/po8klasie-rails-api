@@ -12,10 +12,10 @@ paths:
       parameters:
       - name: page
         in: query
-        default: '1'
+        default: 1
         description: Page number
         schema:
-          type: string
+          type: int
       - name: page_size
         in: query
         default: '10'

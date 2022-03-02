@@ -26,11 +26,13 @@ class CreateInstitutionRecordsJob < ApplicationJob
           longitude: raw_institution.dig('geolokalizacja', 'longitude').to_f,
           website: raw_institution.fetch('stronaInternetowa'),
           email: raw_institution.fetch('email'),
-          city: raw_institution.fetch('adresDoKorespondecjiMiejscowosc'),
           street: raw_institution.fetch('adresDoKorespondecjiUlica'),
           building_no: raw_institution.fetch('adresDoKorespondecjiNumerBudynku'),
           apartment_no: raw_institution.fetch('adresDoKorespondecjiNumerLokalu'),
-          zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy')
+          zip_code: raw_institution.fetch('adresDoKorespondecjiKodPocztowy'),
+          county: raw_institution.fetch('powiat'),
+          municipality: raw_institution.fetch('gmina'),
+          town: raw_institution.fetch('miejscowosc')
         }
       end
       # rubocop:disable Rails/SkipsModelValidations
