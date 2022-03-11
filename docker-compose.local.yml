@@ -1,0 +1,32 @@
+# This docker-compose file allows you to run the app and db in docker
+# For convenience, you can create symlink to docker-compose.yml
+#
+# Do not use this file in production!
+# See https://github.com/po8klasie/infra for info on how to set up prod-ready deployment
+version: '3.1'
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "${PORT:-3000}:80"
+    networks:
+      - po8klasie
+    volumes:
+      - ./:/code
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -b 0.0.0.0 -p 80 -e production"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - po8klasie
+volumes:
+  postgres_data:
+networks:
+  po8klasie:
