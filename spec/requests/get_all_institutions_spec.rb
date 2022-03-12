@@ -34,7 +34,7 @@ RSpec.describe 'Institutions', type: :request do
     end
 
     it "returns empty array when there aren't enough institutions" do
-      get '/institutions', params: { page: '9999999999' }
+      get '/institutions', params: { page: 9_999_999_999 }
       expect(JSON.parse(response.body).size).to equal(0)
     end
   end
