@@ -1,3 +1,8 @@
+# This docker-compose file allows you to run db in docker
+# For convenience, you can create symlink to docker-compose.yml
+#
+# Do not use this file in production!
+# See https://github.com/po8klasie/infra for info on how to set up prod-ready deployment
 version: '3.1'
 services:
   postgres:

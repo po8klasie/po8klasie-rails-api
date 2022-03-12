@@ -37,3 +37,7 @@
 
 # IDE files
 .idea/
+
+# docker-compose files. Please create symlink instead
+docker-compose.yml
+docker-compose.yaml
