@@ -12,7 +12,13 @@ class InstitutionsController < ApplicationController
     institutions = institutions.where(rspo_institution_type_id: @school_rspo_type_ids) unless @school_rspo_type_ids.nil?
     institutions = institutions.where(public: @public_school) unless @public_school.nil?
 
-    render status: '200', json: institutions.paginate(page: @page, per_page: @page_size)
+    @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
+
+    render status: '200', json: {
+      "results": @paginated_institutions,
+      "page": @page,
+      "totalItems": @paginated_institutions.size,
+    }
   end
 
   def show
