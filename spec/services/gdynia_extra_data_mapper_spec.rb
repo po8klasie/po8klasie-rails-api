@@ -19,8 +19,8 @@ require 'rails_helper'
 # "profile_klas", "Profile klas które są oferowane przez daną szkołę"
 # "zajecia_dodatkowe", "Zajęcia dodatkowe oferowane przez szkołę"
 
-# We are intersted in the following fields: "w51", "wx2", "wx3", "w68", "w88", 
-#"opis_szkoły",  "sport", "jezyki_obce", "profile_klas", "zajecia_dodatkowe"
+# We are intersted in the following fields: "w51", "wx2", "wx3", "w68", "w88",
+# "opis_szkoły",  "sport", "jezyki_obce", "profile_klas", "zajecia_dodatkowe"
 
 # Database fields:
 # add_column :institutions, :integration_classes, :integer
@@ -49,8 +49,8 @@ RSpec.describe 'GdyniaExtraDataMapper', type: :service do
           'rspo' => institution_created.rspo_institution_id,
           'opis_szkoly' => 'Opis szkoly',
           'sport' => ['koszykówka', 'piłka nożna'],
-          'jezyki_obce' => ['angielski', 'niemiecki'],
-          'profile_klas' => ['matematyczny', 'fizyczny'],
+          'jezyki_obce' => %w[angielski niemiecki],
+          'profile_klas' => %w[matematyczny fizyczny],
           'zajecia_dodatkowe' => ['klub turystyczny', 'matematyka']
         }
       ]
@@ -66,7 +66,6 @@ RSpec.describe 'GdyniaExtraDataMapper', type: :service do
       expect(institution_from_database.foreign_languages).to eq('angielski,niemiecki')
       expect(institution_from_database.class_profiles).to eq('matematyczny,fizyczny')
       expect(institution_from_database.extracurricular_activities).to eq('klub turystyczny,matematyka')
-
     end
   end
 end
