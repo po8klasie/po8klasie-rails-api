@@ -2,6 +2,38 @@
 
 require 'rails_helper'
 
+# Field info
+# kod,nazwa,komentarz,opis,ikona,jednostka,okres,ostatnia_aktualizacja
+# "w92","Liczba etatów przypadających na jednego nauczyciela"
+# "w110","Nauczyciele wspomagający"
+# "w161","Uczniowie pochodzący spoza Gdyni"
+# "w51","Klasy integracyjne"
+# "wx1","Aktualny dzienny koszt oświaty"
+# "wx2","Liczba sal lekcyjnych"
+# "wx3","Oddziały sportowe"
+# "w68","Zmianowość"
+# "w88","Liczba uczniów na nauczyciela"
+# "opis_szkoły","Opis szkoły"
+# "sport", "Zajęcia sportowe oferowane przez szkołę"
+# "jezyki_obce", "Zajęcia językowe oferowane przez szkołę"
+# "profile_klas", "Profile klas które są oferowane przez daną szkołę"
+# "zajecia_dodatkowe", "Zajęcia dodatkowe oferowane przez szkołę"
+
+# We are intersted in the following fields: "w51", "wx2", "wx3", "w68", "w88",
+# "opis_szkoły",  "sport", "jezyki_obce", "profile_klas", "zajecia_dodatkowe"
+
+# Database fields:
+# add_column :institutions, :integration_classes, :integer
+# add_column :institutions, :classrooms, :integer
+# add_column :institutions, :sport_facilities, :integer
+# add_column :institutions, :working_time, :integer
+# add_column :institutions, :studerns_per_teacher, :integer
+# add_column :institutions, :description, :string
+# add_column :institutions, :sports, :string
+# add_column :institutions, :foreign_languages, :string
+# add_column :institutions, :class_profiles, :string
+# add_column :institutions, :extracurricular_activities, :string
+
 RSpec.describe 'GdyniaExtraDataClient' do
   describe '#raw_schools' do
     # We are disabling webmock because we want to connect to the real api
@@ -24,7 +56,12 @@ RSpec.describe 'GdyniaExtraDataClient' do
           'wx3' => 30,
           'w68' => 40,
           'w88' => 50,
-          'rspo' => institution_1.rspo_institution_id
+          'rspo' => institution_1.rspo_institution_id,
+          'opis_szkoly' => 'Opis szkoły',
+          'sport' => ['koszykówka', 'siatkówka'],
+          'jezyki_obce' => ['angielski', 'niemiecki'],
+          'profile_klas' => ['matematyczny', 'fizyczny'],
+          'zajecia_dodatkowe' => ['chór', 'matematyka']
         },
         {
           'w51' => 101,
@@ -32,7 +69,12 @@ RSpec.describe 'GdyniaExtraDataClient' do
           'wx3' => 301,
           'w68' => 401,
           'w88' => 501,
-          'rspo' => institution_2.rspo_institution_id
+          'rspo' => institution_2.rspo_institution_id,
+          'opis_szkoly' => 'Opis szkoły',
+          'sport' => ['koszykówka', 'siatkówka'],
+          'jezyki_obce' => ['angielski', 'niemiecki'],
+          'profile_klas' => ['matematyczny', 'fizyczny'],
+          'zajecia_dodatkowe' => ['chór', 'matematyka']
         }
       ]
 

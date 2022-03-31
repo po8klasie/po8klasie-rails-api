@@ -47,7 +47,7 @@ RSpec.describe 'GdyniaExtraDataMapper', type: :service do
           'w68' => 40,
           'w88' => 50,
           'rspo' => institution_created.rspo_institution_id,
-          'opis_szkoly' => 'Opis szkoly',
+          'opis_szkoly' => 'Opis szkoły',
           'sport' => ['koszykówka', 'piłka nożna'],
           'jezyki_obce' => %w[angielski niemiecki],
           'profile_klas' => %w[matematyczny fizyczny],
