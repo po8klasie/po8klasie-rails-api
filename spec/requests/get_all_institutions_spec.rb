@@ -20,7 +20,7 @@ RSpec.describe 'Institutions', type: :request do
       (1..20).each do |page_size|
         get '/institutions', params: { page_size: page_size }
         expect(JSON.parse(response.body)["results"].size).to equal(page_size)
-        expect(JSON.parse(response.body)["totalItems"]).to equal(page_size)
+        expect(JSON.parse(response.body)["totalItems"]).to equal(Institution.count)
       end
     end
 

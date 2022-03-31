@@ -17,7 +17,7 @@ class InstitutionsController < ApplicationController
     render status: '200', json: {
       "results": @paginated_institutions,
       "page": @page,
-      "totalItems": @paginated_institutions.size,
+      "totalItems": Institution.count,
     }
   end
 
