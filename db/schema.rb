@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_12_134157) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_043816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -76,6 +76,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_12_134157) do
     t.string "county", null: false
     t.string "municipality", null: false
     t.string "town", null: false
+    t.string "description"
+    t.string "sports"
+    t.string "foreign_languages"
+    t.string "class_profiles"
+    t.string "extracurricular_activities"
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 
