@@ -32,3 +32,15 @@ paramenters:
 id:int, required
 it specifies the internal id of the institution to be shown
 this is not the RSPO id of the institution
+
+
+### Institution model 
+
+in the institution model the data that comes from Gdyania API as a list is joined using a comma. for example 
+
+"zajecia_dodatkowe": [
+            "klub turystyczny",
+            "sekcja karate"
+        ]
+
+institution_from_gdynia.exatracurricular_activities will return "klub turystyczny,sekcja karate"

@@ -11,8 +11,14 @@
 # "wx3","Oddziały sportowe"
 # "w68","Zmianowość"
 # "w88","Liczba uczniów na nauczyciela"
+# "opis_szkoły","Opis szkoły"
+# "sport", "Zajęcia sportowe oferowane przez szkołę"
+# "jezyki_obce", "Zajęcia językowe oferowane przez szkołę"
+# "profile_klas", "Profile klas które są oferowane przez daną szkołę"
+# "zajecia_dodatkowe", "Zajęcia dodatkowe oferowane przez szkołę"
 
-# We are intersted in the following fields: "w51", "wx2", "wx3", "w68", "w88"
+# We are intersted in the following fields: "w51", "wx2", "wx3", "w68", "w88",
+# "opis_szkoły",  "sport", "jezyki_obce", "profile_klas", "zajecia_dodatkowe"
 class GdyniaExtraDataMapper < ApplicationService
   def call(raw_data)
     raw_data.each do |raw_school|
@@ -29,6 +35,11 @@ class GdyniaExtraDataMapper < ApplicationService
       rspo_match[:sport_facilities] = raw_school.fetch('wx3')
       rspo_match[:working_time] = raw_school.fetch('w68')
       rspo_match[:students_per_teacher] = raw_school.fetch('w88')
+      rspo_match[:description] = raw_school.fetch('opis_szkoly')
+      rspo_match[:sports] = raw_school.fetch('sport').join(',')
+      rspo_match[:foreign_languages] = raw_school.fetch('jezyki_obce').join(',')
+      rspo_match[:class_profiles] = raw_school.fetch('profile_klas').join(',')
+      rspo_match[:extracurricular_activities] = raw_school.fetch('zajecia_dodatkowe').join(',')
 
       rspo_match.save
     end
