@@ -4,9 +4,8 @@ Steps for regenerating the database:
  - clone this repository
  - create a new branch named like 21_01_2020_data_regeneration
  - change the database field in the production config to the database_1 if database_2 is present or vice versa.
- - create the databases if they don't exist using RAILS_ENV=production rails db:create 
- - run all migrations using rails db:migrate
- - run the migrations with ra
+ - create the databases if it doesn't exist using RAILS_ENV=production rails db:create 
+ - run all migrations using rails RAILS_ENV=production raisl db:migrate
  - Start the server locally with rails s -e production
  - Enter rails console using rails c -e production in separate terminal
  - Delete all Institution objects in the database using Institution.delete_all
