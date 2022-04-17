@@ -58,10 +58,10 @@ RSpec.describe 'GdyniaExtraDataClient' do
           'w88' => 50,
           'rspo' => institution_1.rspo_institution_id,
           'opis_szkoly' => 'Opis szkoły',
-          'sport' => ['koszykówka', 'siatkówka'],
-          'jezyki_obce' => ['angielski', 'niemiecki'],
-          'profile_klas' => ['matematyczny', 'fizyczny'],
-          'zajecia_dodatkowe' => ['chór', 'matematyka']
+          'sport' => %w[koszykówka siatkówka],
+          'jezyki_obce' => %w[angielski niemiecki],
+          'profile_klas' => %w[matematyczny fizyczny],
+          'zajecia_dodatkowe' => %w[chór matematyka]
         },
         {
           'w51' => 101,
@@ -71,10 +71,10 @@ RSpec.describe 'GdyniaExtraDataClient' do
           'w88' => 501,
           'rspo' => institution_2.rspo_institution_id,
           'opis_szkoly' => 'Opis szkoły',
-          'sport' => ['koszykówka', 'siatkówka'],
-          'jezyki_obce' => ['angielski', 'niemiecki'],
-          'profile_klas' => ['matematyczny', 'fizyczny'],
-          'zajecia_dodatkowe' => ['chór', 'matematyka']
+          'sport' => %w[koszykówka siatkówka],
+          'jezyki_obce' => %w[angielski niemiecki],
+          'profile_klas' => %w[matematyczny fizyczny],
+          'zajecia_dodatkowe' => %w[chór matematyka]
         }
       ]
 
