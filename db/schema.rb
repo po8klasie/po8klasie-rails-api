@@ -74,23 +74,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_120212) do
     t.integer "sport_facilities"
     t.float "working_time"
     t.float "students_per_teacher"
-<<<<<<< HEAD
-    t.string "powiat", null: false
-    t.string "gmina", null: false
-    t.string "miejscowosc", null: false
-=======
     t.string "county", null: false
     t.string "municipality", null: false
     t.string "town", null: false
-<<<<<<< HEAD
->>>>>>> 67f01d679c32bb55c0e8c0538db62ba085367644
-=======
     t.string "description"
     t.string "sports"
     t.string "foreign_languages"
     t.string "class_profiles"
     t.string "extracurricular_activities"
->>>>>>> 11d39964d31ddd79e1ca9c7eb9364219165a4fee
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 
