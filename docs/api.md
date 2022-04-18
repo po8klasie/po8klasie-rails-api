@@ -20,6 +20,18 @@ it specifies whether schools have to be public or not public
 school_rspo_type_ids: array of ints, optional, default=null
 it specifies the types of schools to be considered
 
+class_profiles: string, optional, default=null
+it specifies the class profiles to be considere separated by commas
+
+sports: string, optional, default=null
+it specifies the sports to be considere separated by commas
+
+foreign_languages: string, optional, default=null
+it specifies the foreign_languages to be considere separated by commas
+
+extracurricular_activities: string, optional, default=null
+it specifies the extracurricular activities to be considere separated by commas
+
 page_size:string, optional, default='10'
 it specifies the pagination size.
 Please remember to keep the page_size consistent between api calls from the same client

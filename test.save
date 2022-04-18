@@ -1,0 +1,10 @@
+As a Main Backend Maintainer I:
+- Wrote the po8klasie.pl backend using Ruby on Rails.
+- Integrated our service with external data providers.
+- Collaborated with frontend developers on the design and structure of the api.
+- Communicated with non technical stakeholders of the project about it's development and goals. 
+- Integrated our app with Github Actions for linting and testing.
+- Learned the value of code review thanks to code review and mentorship from Wojtek Wrona.
+- Collaborated with dev-ops engineers and frontend developers on cloud provider and deployment method choices.
+
+The code is available at https://github.com/po8klasie/po8klasie-rails-api
