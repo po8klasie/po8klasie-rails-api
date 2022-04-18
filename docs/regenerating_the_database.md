@@ -15,4 +15,3 @@ Steps for regenerating the database:
  - If any of the jobs failed you can try again. but remember to clear the Institition objects first using Institution.delete_all and start from the first one. 
  - Create a pull request with the changes you made. Create it only after all jobs succeded.
  - After the pull request is merged clear the Cloudflare cache using the "Clear cloudflare cache" workflow in Github Actions. 
-
