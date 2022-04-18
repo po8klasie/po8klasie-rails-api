@@ -16,13 +16,14 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_sports(@sports) unless @sports.nil?
     institutions = institutions.search_by_foreign_languages(@foreign_languages) unless @foreign_languages.nil?
     institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities) unless @extracurricular_activities.nil?
-
+    
+    institutions_count = institutions.count
     @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
 
     render status: '200', json: {
       results: @paginated_institutions,
       page: @page,
-      totalItems: Institution.count
+      totalItems: institutions_count
     }
   end
 
