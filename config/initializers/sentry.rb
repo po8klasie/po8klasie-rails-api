@@ -3,10 +3,12 @@ Sentry.init do |config|
     # The dsn will be collected fron SENTRY_DSN env variable
     
     config.breadcrumbs_logger = [:active_support_logger, :http_logger]
-
-    # To activate performance monitoring, set one of these options.
-    # We recommend adjusting the value in production:
-    config.traces_sample_rate = 1
+    
+    if Rails.env.production?
+        config.traces_sample_rate = 1
+    else 
+        config.traces_sample_rate = 0
+    end
     # or
     config.traces_sampler = lambda do |context|
         true
