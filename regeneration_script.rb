@@ -1,5 +1,17 @@
 #This script should be run using rails runner not ruby
 
+#How to use this script in cicd:
+
+# - first make sure that all the env variables required for accessing the production db are present in the application docker container 
+#(I'm assuming that this is how we are going to run this because there everything is already prepared and installed), that would be DATABASE_HOST, 
+#DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD
+
+# - second make sure that the server is running in the production mode in the background using RAILS_ENV=production rails s -b 127.0.0.1
+
+# - third start the script in the production mode using RAILS_ENV=production rails r regeneration_script.rb
+
+
+
 #we don't want to log from queries we are running in this scirpt
 ActiveRecord::Base.logger = nil
 
