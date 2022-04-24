@@ -2,6 +2,7 @@
 
 class Institution < ApplicationRecord
   belongs_to :institution_type
+  has_many :subject_sets, dependent: :destroy
 
   include PgSearch::Model
 
