@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_24_065722) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_24_081412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pgcrypto"
@@ -80,7 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_24_065722) do
     t.string "description"
     t.string "sports"
     t.string "foreign_languages"
-    t.string "class_profiles"
     t.string "extracurricular_activities"
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
