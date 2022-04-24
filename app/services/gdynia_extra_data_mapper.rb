@@ -38,10 +38,60 @@ class GdyniaExtraDataMapper < ApplicationService
       rspo_match[:description] = raw_school.fetch('opis_szkoly')
       rspo_match[:sports] = raw_school.fetch('sport').join(',')
       rspo_match[:foreign_languages] = raw_school.fetch('jezyki_obce').join(',')
-      rspo_match[:class_profiles] = raw_school.fetch('profile_klas').join(',')
       rspo_match[:extracurricular_activities] = raw_school.fetch('zajecia_dodatkowe').join(',')
-
+      
       rspo_match.save
+
+      class_profiles = raw_school.fetch('profile_klas') 
+      if class_profiles != "" &&  class_profiles.size != 0
+        debugger
+        class_profiles.each do |class_profile| 
+          subject_set = SubjectSet.create(institution_id: rspo_match.id) 
+          subject_names = gdynia_class_profile_to_subject_names_array(class_profile)
+
+          subject_names.each do |subject_name|
+            subject = Subject.where(name: subject_name)
+
+            if subject.empty?
+              raise "The subject #{subject_name} does not exist in the database, make sure that subjects have been populated"
+            elsif subject.count > 1
+              raise "There are more than one subjects with the name #{subject_name}, make sure only one exists in the database"
+            end
+
+            subject_set.subjects << subject
+          end
+        end
+      end
     end
+  end
+
+  def gdynia_class_profile_to_subject_names_array(class_profile)
+    subject_names_array = []
+    
+    case class_profile
+      when "matematyczna"
+        subject_names_array << "Matematyka"
+      when "biologiczna"
+        subject_names_array << "Biologia"
+      when "artystyczna"
+        subject_names_array << "Sztuka"
+      when "dziennikarsko-prawnicza"
+        subject_names_array << "Dziennikarstwo"
+        subject_names_array << "Prawo"
+      when "politechniczna"
+        subject_names_array << "Nauki ścisłe"
+      when "medyczna"
+        subject_names_array << "Medycyna"
+      when "informatyczna"
+        subject_names_array << "Informatyka"
+      when "ekonomiczno-menadżerska"
+        subject_names_array << "Ekonomia"
+        subject_names_array << "Zarządzanie"
+      when "dziennikarsko-prawnicza"
+        subject_names_array << "Dziennikarstwo"
+        subject_names_array << "Prawo"
+    end
+
+    return subject_names_array
   end
 end
