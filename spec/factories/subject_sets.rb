@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :extended_subject do
+  factory :subject_set do
     
   end
 end

@@ -1,4 +1,4 @@
-class CreateExtendedSubjectsExtendedSubjectSetsTable < ActiveRecord::Migration[7.0]
+class CreateSubjectsSubjectSetsTable < ActiveRecord::Migration[7.0]
   def change
     create_table :subject_sets_subjects, id: false do |t|
       t.belongs_to :subject_set

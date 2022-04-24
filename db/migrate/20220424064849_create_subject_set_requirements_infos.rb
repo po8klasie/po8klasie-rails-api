@@ -1,4 +1,4 @@
-class CreateExtendedSubjectSetRequirementsInfos < ActiveRecord::Migration[7.0]
+class CreateSubjectSetRequirementsInfos < ActiveRecord::Migration[7.0]
   def change
     create_table :subject_set_requirements_infos do |t|
       t.belongs_to :subject_set
