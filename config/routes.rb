@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs-api'
   devise_for :users, defaults: { format: :json }
   resources :institutions
+  get "/subjects" => "subjects#index"
   
   mount GoodJob::Engine => 'good_job'
 

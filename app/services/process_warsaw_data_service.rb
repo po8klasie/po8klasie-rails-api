@@ -10,147 +10,8 @@ class ProcessWarsawDataService < ApplicationService
         #    "Maksimum": "179,70",
         #    "Średnia": "164,09"
         #}
-
-=begin
- ["fiz-ang-mat",
- "mat-fiz-ang",
- "mat-geogr-ang",
- "mat-biol-chem",
- "biol-ang-pol",
- "geogr-ang-hiszp",
- "geogr-ang-mat",
- "biol-chem",
- "pol-wos",
- "biol-geogr",
- "geogr-wos",
- "ang-hiszp-niem",
- "hist-wos",
- "ang-geogr",
- "fiz-mat",
- "hist-pol-wos",
- "biol-chem-mat",
- "geogr-mat",
- "pol-ang-hiszp",
- "ang-niem-pol",
- "ang-pol-mat",
- "hist-ang-pol",
- "biol-chem-ang",
- "biol-geogr-ang",
- "hist-pol",
- "inf-ang-mat",
- "geogr-ang",
- "inf-mat",
- "biol-ang",
- "geogr-ang-niem",
- "pol-hist-wos",
- "ang-mat",
- "h.szt.-pol",
- "geogr-ang-wos",
- "ang-mat-inf",
- "mat-chem",
- "mat-wos",
- "mat-geogr",
- "mat-biol",
- "hist-pol-wło",
- "pol-ang-geogr",
- "hist-ang-wos",
- "hist-wos-ang",
- "fiz-inf-mat",
- "geogr-niem-mat",
- "geogr-ros-mat",
- "geogr-hist-",
- "mat-geogr-hiszp",
- "biol-chem-hiszp",
- "pol-hist-h.szt.",
- "pol-wos-hiszp",
- "ang-pol",
- "pol-hist",
- "geogr-hiszp-mat",
- "hist-franc",
- "hist-niem",
- "Kucharz",
- "Cukiernik",
- "(ang*-niem*)",
- "biol-ang-mat",
- "geogr-mat-wos",
- "chem-fiz-mat",
- "geogr-hiszp-wos",
- "ang-pol-wos",
- "geogr-mat-ang",
- "(ang-hisz*)",
- "ang-biol-geogr",
- "mat-fiz-inf",
- "inf-pol-ang",
- "ang-inf-wos",
- "geogr-ang-pol",
- "hist-mat-wos",
- "mat-fiz-chem",
- "inf-ang",
- "geogr-hist-mat",
- "h.muz.-",
- "h.muz.-pol",
- "geogr-franc-",
- "geogr-hiszp-",
- "geogr-niem-",
- "hist-franc-",
- "hist-hiszp-",
- "hist-niem-",
- "hist-h.szt.-pol",
- "ang-hiszp-pol",
- "Technik",
- "h.szt.-ang-pol",
- "ang-antyk-pol",
- "hist-franc-pol",
- "geogr-franc-pol",
- "hist-antyk-pol",
- "franc",
- "(niem-ang)",
- "ang-pol-wło",
- "hiszp-ang-geogr",
- "niem-ang-geogr",
- "biol-chem-obcy",
- "biol-obcy-pol",
- "hist-obcy-pol",
- "wielozawodowa",
- "mat-ang",
- "biol-ang-",
- "mat-geogr-niem",
- "pol-hist-ang",
- "ang-geogr-wos",
- "ang-hiszp-mat",
- "ang-mat-wło",
- "ang-geogr-mat",
- "ang-mat-fiz",
- "hist-inf-ang",
- "Fotograf",
- "hist-ang",
- "pol-hist-hiszp",
- "mat-inf-fiz",
- "pol-wos-ang",
- "ang-wos",
- "chem-mat",
- "ang-pol-hist-wos",
- "mat-inf-ang",
- "geogr-franc-mat",
- "ang-franc-mat",
- "ang-niem-mat",
- "geogr-hiszp-pol",
- "geogr-niem-pol",
- "(ang-fra*,hisz*,niem*)",
- "Złotnik-jubiler",
- "ang-biol-wos",
- "h.szt.-ang-",
- "ang",
- "niem",
- "hiszp",
- "(fra-ang)",
- "geogr-hist-wos"]
-=end
-
         raw_school_data = JSON.parse(File.read(Rails.root.join('data', 'punkty_warszawa.json')))       
 
-        processable_schools = 0
-        subject_combinations = []
         raw_school_data.each do |raw_school_data_piece|
             institution_name = raw_school_data_piece.fetch("Nazwa szkoły")
             institution = Institution.search_by_name(institution_name)
@@ -162,16 +23,298 @@ class ProcessWarsawDataService < ApplicationService
                 next
             end
 
-            processable_schools += 1
-
             split_school_subject_data = raw_school_data_piece["Grupa rekrutacyjna/oddział"].split(" ")
+            subject_names_array = []
+            
+            #I know that this looks horrible at a first glance but it's the only way to get 100% coverage
+            #on the processable data due to it's very low quality and almost all of that was written 
+            #by github copilot
+            case split_school_subject_data
+                when "fiz-ang-mat"
+                    subject_names_array = ["Fizyka", "Angielski", "Matematyka"]
+                when "mat-geogr-ang"
+                    subject_names_array = ["Matematyka", "Geografia"]
+                when "mat-biol-chem"
+                    subject_names_array = ["Matematyka", "Biologia", "Chemia"]
+                when "biol-ang-pol"
+                    subject_names_array = ["Biologia", "Angielski", "Polski"]
+                when "geogr-ang-hiszp"
+                    subject_names_array = ["Geografia", "Angielski", "Hiszpański"]
+                when "geogr-ang-mat"
+                    subject_names_array = ["Geografia", "Angielski", "Matematyka"]
+                when "biol-chem"
+                    subject_names_array = ["Biologia", "Chemia"]
+                when "pol-wos"
+                    subject_names_array = ["Polski", "WOS"]
+                when "biol-geogr"
+                    subject_names_array = ["Biologia", "Geografia"]
+                when "geogr-wos"
+                    subject_names_array = ["Geografia", "WOS"]
+                when "ang-hiszp-niem"
+                    subject_names_array = ["Angielski", "Hiszpański", "Niemiecki"]
+                when "hist-wos"
+                    subject_names_array = ["Historia"]
+                when "ang-geogr"
+                    subject_names_array = ["Angielski", "Geografia"]
+                when "fiz-mat"
+                    subject_names_array = ["Fizyka", "Matematyka"]
+                when "hist-pol-wos"
+                    subject_names_array = ["Historia", "Polski", "WOS"]
+                when "biol-chem-mat"
+                    subject_names_array = ["Biologia", "Chemia", "Matematyka"]
+                when "geogr-mat"
+                    subject_names_array = ["Geografia", "Matematyka"]
+                when "pol-ang-hiszp"
+                    subject_names_array = ["Polski", "Angielski", "Hiszpański"]
+                when "ang-niem-pol"
+                    subject_names_array = ["Angielski", "Niemiecki", "Polski"]
+                when "ang-pol-mat"
+                    subject_names_array = ["Angielski", "Polski", "Matematyka"]
+                when "hist-ang-pol"
+                    subject_names_array = ["Historia", "Angielski", "Polski"]
+                when "biol-chem-ang"
+                    subject_names_array = ["Biologia", "Chemia", "Angielski"]
+                when "biol-geogr-ang"
+                    subject_names_array = ["Biologia", "Geografia", "Angielski"]
+                when "hist-pol"
+                    subject_names_array = ["Historia", "Polski"]
+                when "inf-ang-mat"
+                    subject_names_array = ["Informatyka", "Angielski", "Matematyka"]
+                when "geogr-ang"
+                    subject_names_array = ["Geografia", "Angielski"]
+                when "inf-mat"
+                    subject_names_array = ["Informatyka", "Matematyka"]
+                when "biol-ang"
+                    subject_names_array = ["Biologia", "Angielski"]
+                when "geogr-ang-niem"
+                    subject_names_array = ["Geografia", "Angielski", "Niemiecki"]
+                when "pol-hist-wos"
+                    subject_names_array = ["Polski", "Historia", "WOS"]
+                when "ang-mat"
+                    subject_names_array = ["Angielski", "Matematyka"]
+                when "h.szt.-pol"
+                    subject_names_array = ["Historia Sztuki", "Polski"]
+                when "geogr-ang-wos"
+                    subject_names_array = ["Geografia", "Angielski", "WOS"]
+                when "ang-mat-inf"
+                    subject_names_array = ["Angielski", "Matematyka", "Informatyka"]
+                when "mat-chem"
+                    subject_names_array = ["Matematyka", "Chemia"]
+                when "mat-wos"
+                    subject_names_array = ["Matematyka", "WOS"]
+                when "mat-geogr"
+                    subject_names_array = ["Matematyka", "Geografia"]
+                when "mat-biol"
+                    subject_names_array = ["Matematyka", "Biologia"]
+                when "hist-pol-wło"
+                    subject_names_array = ["Historia", "Polski", "Włoski"]
+                when "pol-ang-geogr"
+                    subject_names_array = ["Polski", "Angielski", "Geografia"]
+                when "hist-ang-wos"
+                    subject_names_array = ["Historia", "Angielski", "WOS"]
+                when "hist-wos-ang"
+                    subject_names_array = ["Historia", "WOS", "Angielski"]
+                when "fiz-inf-mat"
+                    subject_names_array = ["Fizyka", "Informatyka", "Matematyka"]
+                when "geogr-niem-mat"
+                    subject_names_array = ["Geografia", "Niemiecki", "Matematyka"]
+                when "geogr-ros-mat"
+                    subject_names_array = ["Geografia", "Rosyjski", "Matematyka"]
+                when "geogr-hist-"
+                    subject_names_array = ["Geografia", "Historia"]
+                when "mat-geogr-hiszp"
+                    subject_names_array = ["Matematyka", "Geografia", "Hiszpański"]
+                when "biol-chem-hiszp"
+                    subject_names_array = ["Biologia", "Chemia", "Hiszpański"]
+                when "pol-hist-h.szt."
+                    subject_names_array = ["Polski", "Historia", "Historia Sztuki"]
+                when "pol-wos-hiszp"
+                    subject_names_array = ["Polski", "WOS", "Hiszpański"]
+                when "ang-pol"
+                    subject_names_array = ["Angielski", "Polski"]
+                when "pol-hist"
+                    subject_names_array = ["Polski", "Historia"]
+                when "geogr-hiszp-mat"
+                    subject_names_array = ["Geografia", "Hiszpański", "Matematyka"]
+                when "hist-franc"
+                    subject_names_array = ["Historia", "Francuski"]
+                when "hist-niem"
+                    subject_names_array = ["Historia", "Niemiecki"]
+                when "Kucharz"
+                    subject_names_array = ["Gotowanie"]
+                when "(ang*-niem*)"
+                    subject_names_array = ["Angielski", "Niemiecki"]
+                when "biol-ang-mat"
+                    subject_names_array = ["Biologia", "Angielski", "Matematyka"]
+                when "geogr-mat-wos"
+                    subject_names_array = ["Geografia", "Matematyka", "WOS"]
+                when "chem-fiz-mat"
+                    subject_names_array = ["Chemia", "Fizyka", "Matematyka"]
+                when "geogr-hiszp-wos"
+                    subject_names_array = ["Geografia", "Hiszpański", "WOS"]
+                when "ang-pol-wos"
+                    subject_names_array = ["Angielski", "Polski", "WOS"]
+                when "geogr-mat-ang"
+                    subject_names_array = ["Geografia", "Matematyka", "Angielski"]
+                when "(ang-hisz*)"
+                    subject_names_array = ["Angielski", "Hiszpański"]
+                when "ang-biol-geogr"
+                    subject_names_array = ["Angielski", "Biologia", "Geografia"]
+                when "mat-fiz-inf"
+                    subject_names_array = ["Matematyka", "Fizyka", "Informatyka"]
+                when "inf-pol-ang"
+                    subject_names_array = ["Informatyka", "Polski", "Angielski"]
+                when "ang-inf-wos"
+                    subject_names_array = ["Angielski", "Informatyka", "WOS"]
+                when "geogr-ang-pol"
+                    subject_names_array = ["Geografia", "Angielski", "Polski"]
+                when "hist-mat-wos"
+                    subject_names_array = ["Historia", "Matematyka", "WOS"]
+                when "mat-fiz-chem"
+                    subject_names_array = ["Matematyka", "Fizyka", "Chemia"]
+                when "inf-ang"
+                    subject_names_array = ["Informatyka", "Angielski"]
+                when "geogr-hist-mat"
+                    subject_names_array = ["Geografia", "Historia", "Matematyka"]
+                when "h.muz.-"
+                    subject_names_array = ["Muzyka"]
+                when "h.muz.-pol"
+                    subject_names_array = ["Muzyka", "Polski"]
+                when "geogr-franc-"
+                    subject_names_array = ["Geografia", "Francuski"]
+                when "geogr-hiszp-"
+                    subject_names_array = ["Geografia", "Hiszpański"]
+                when "geogr-niem-"
+                    subject_names_array = ["Geografia", "Niemiecki"]
+                when "hist-franc-"
+                    subject_names_array = ["Historia", "Francuski"]
+                when "hist-hiszp-"
+                    subject_names_array = ["Historia", "Hiszpański"]
+                when "hist-niem-"
+                    subject_names_array = ["Historia", "Niemiecki"]
+                when "hist-h.szt.-pol"
+                    subject_names_array = ["Historia", "Historia Sztuki", "Polski"]
+                when "ang-hiszp-pol"
+                    subject_names_array = ["Angielski", "Hiszpański", "Polski"]
+                when "Technik"
+                    subject_names_array = ["Technik"]
+                when "h.szt.-ang-pol"
+                    subject_names_array = ["Historia Sztuki", "Angielski", "Polski"]
+                when "ang-antyk-pol"
+                    subject_names_array = ["Angielski", "Antyk", "Polski"]
+                when "hist-franc-pol"
+                    subject_names_array = ["Historia", "Francuski", "Polski"]
+                when "geogr-franc-pol"
+                    subject_names_array = ["Geografia", "Francuski", "Polski"]
+                when "hist-antyk-pol"
+                    subject_names_array = ["Historia", "Antyk", "Polski"]
+                when "franc"
+                    subject_names_array = ["Francuski"]
+                when "(niem-ang)"
+                    subject_names_array = ["Niemiecki", "Angielski"]
+                when "ang-pol-wło"
+                    subject_names_array = ["Angielski", "Polski", "Włoski"]
+                when "hiszp-ang-geogr"
+                    subject_names_array = ["Hiszpański", "Angielski", "Geografia"]
+                when "niem-ang-geogr"
+                    subject_names_array = ["Niemiecki", "Angielski", "Geografia"]
+                when "biol-chem-obcy"
+                    subject_names_array = ["Biologia", "Chemia"]
+                when "biol-obcy-pol"
+                    subject_names_array = ["Biologia", "Polski"]
+                when "hist-obcy-pol"
+                    subject_names_array = ["Historia", "Polski"]
+                when "wielozawodowa"
+                    subject_names_array = []
+                when "mat-ang"
+                    subject_names_array = ["Matematyka", "Angielski"]
+                when "biol-ang-"
+                    subject_names_array = ["Biologia", "Angielski"]
+                when "mat-geogr-niem"
+                    subject_names_array = ["Matematyka", "Geografia", "Niemiecki"]
+                when "pol-hist-ang"
+                    subject_names_array = ["Polski", "Historia", "Angielski"]
+                when "ang-geogr-wos"
+                    subject_names_array = ["Angielski", "Geografia", "Włoski"]
+                when "ang-hiszp-mat"
+                    subject_names_array = ["Angielski", "Hiszpański", "Matematyka"]
+                when "ang-mat-wło"
+                    subject_names_array = ["Angielski", "Matematyka", "Włoski"]
+                when "ang-geogr-mat"
+                    subject_names_array = ["Angielski", "Geografia", "Matematyka"]
+                when "ang-mat-fiz"
+                    subject_names_array = ["Angielski", "Matematyka", "Fizyka"]
+                when "hist-inf-ang"
+                    subject_names_array = ["Historia", "Informatyka", "Angielski"]
+                when "Fotograf"
+                    subject_names_array = ["Fotografia"]
+                when "hist-ang"
+                    subject_names_array = ["Historia", "Angielski"]
+                when "pol-hist-hiszp"
+                    subject_names_array = ["Polski", "Historia", "Hiszpański"]
+                when "mat-inf-fiz"
+                    subject_names_array = ["Matematyka", "Informatyka", "Fizyka"]
+                when "pol-wos-ang"
+                    subject_names_array = ["Polski", "Włoski", "Angielski"]
+                when "ang-wos"
+                    subject_names_array = ["Angielski", "Włoski"]
+                when "chem-mat"
+                    subject_names_array = ["Chemia", "Matematyka"]
+                when "ang-pol-hist-wos"
+                    subject_names_array = ["Angielski", "Polski", "Historia", "Włoski"]
+                when "mat-inf-ang"
+                    subject_names_array = ["Matematyka", "Informatyka", "Angielski"]
+                when "geogr-franc-mat"
+                    subject_names_array = ["Geografia", "Francuski", "Matematyka"]
+                when "ang-franc-mat"
+                    subject_names_array = ["Angielski", "Francuski", "Matematyka"]
+                when "ang-mat-wło-wos"
+                    subject_names_array = ["Angielski", "Matematyka", "Włoski", "WOS"]
+                when "ang-niem-mat"
+                    subject_names_array = ["Angielski", "Niemiecki", "Matematyka"]
+                when "geogr-hiszp-pol"
+                    subject_names_array = ["Geografia", "Hiszpański", "Polski"]
+                when "geogr-niem-pol"
+                    subject_names_array = ["Geografia", "Niemiecki", "Polski"]
+                when "(ang-fra*,hisz*,niem*)"
+                    subject_names_array = ["Angielski", "Francuski", "Hiszpański", "Niemiecki"]
+                when "Złotnik-jubiler"
+                    subject_names_array = ["Złotnik"]
+                when "ang-biol-wos"
+                    subject_names_array = ["Angielski", "Biologia", "Włoski"]
+                when "h.szt.-ang-"
+                    subject_names_array = ["Hiszpański", "Angielski"]
+                when "ang"
+                    subject_names_array = ["Angielski"]
+                when "niem"
+                    subject_names_array = ["Niemiecki"]
+                when "hiszp"
+                    subject_names_array = ["Hiszpański"]
+                when "(fra-ang)"
+                    subject_names_array = ["Francuski", "Angielski"]
+                when "geogr-hist-wos"
+                    subject_names_array = ["Geografia", "Historia", "Włoski"]
+            end
 
-            subject_combinations << split_school_subject_data[2]
+            subject_set = SubjectSet.create(institution_id: institution.first.id) 
+  
+            subject_names_array.each do |subject_name|
+              subject = Subject.where(name: subject_name)
+  
+              if subject.empty?
+                raise "The subject #{subject_name} does not exist in the database, make sure that subjects have been populated"
+              elsif subject.count > 1
+                raise "There are more than one subjects with the name #{subject_name}, make sure only one exists in the database"
+              end
+  
+              subject_set.subjects << subject
+            end
 
-            #subject_set = SubjectSet.create(institution_id: institution.first.id)
-
+            subject_set_requirements_info = SubjectSetRequirementsInfo.new(subject_set_id: subject_set.id)
+            subject_set_requirements_info.min_points = raw_school_data_piece["Minimum"].to_f 
+            subject_set_requirements_info.max_points = raw_school_data_piece["Maksimum"].to_f
+            subject_set_requirements_info.average_points = raw_school_data_piece["Średnia"].to_f
+            subject_set_requirements_info.save
         end
-
-        debugger
     end
 end
