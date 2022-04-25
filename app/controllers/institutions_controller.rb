@@ -12,14 +12,23 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_name(@name_query) unless @name_query.nil?
     institutions = institutions.where(rspo_institution_type_id: @school_rspo_type_ids) unless @school_rspo_type_ids.nil?
     institutions = institutions.where(public: @public_school) unless @public_school.nil?
-    institutions = institutions.search_by_class_profiles(@class_profiles) unless @class_profiles.nil?
     institutions = institutions.search_by_sports(@sports) unless @sports.nil?
     institutions = institutions.search_by_foreign_languages(@foreign_languages) unless @foreign_languages.nil?
-    unless @extracurricular_activities.nil?
-      institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities)
+    institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities) unless @extracurricular_activities.nil?
+
+    if @class_profiles != nil 
+      institutions = institutions.where(:subject_set => { 
+        where: { 
+          :subject => { 
+            where: { name: @class_profiles }  
+          } 
+         } 
+       })
     end
 
     institutions_count = institutions.count
+
+    
     @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
 
     render status: '200', json: {
@@ -80,7 +89,7 @@ class InstitutionsController < ApplicationController
 
   def class_profiles
     @class_profiles = params.fetch(:class_profiles, nil)
-    @class_profiles = @class_profiles.gsub(',', ' ') if @class_profiles.nil? == false
+    @class_profiles = @class_profiles.strip.split(",") if @class_profiles.nil? == false
   end
 
   def sports

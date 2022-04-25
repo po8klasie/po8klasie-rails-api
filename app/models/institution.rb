@@ -13,7 +13,6 @@ class Institution < ApplicationRecord
   pg_search_scope :search_by_foreign_languages, against: :foreign_languages, using: { tsearch: { any_word: true } }
   pg_search_scope :search_by_extracurricular_activities, against: :extracurricular_activities,
                                                          using: { tsearch: { any_word: true } }
-
   def address
     "#{town} #{street} #{building_no}/#{apartment_no} #{zip_code}"
   end
