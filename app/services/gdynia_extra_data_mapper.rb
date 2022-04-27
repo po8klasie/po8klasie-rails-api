@@ -44,7 +44,6 @@ class GdyniaExtraDataMapper < ApplicationService
 
       class_profiles = raw_school.fetch('profile_klas') 
       if class_profiles != "" &&  class_profiles.size != 0
-        debugger
         class_profiles.each do |class_profile| 
           subject_set = SubjectSet.create(institution_id: rspo_match.id) 
           subject_names = gdynia_class_profile_to_subject_names_array(class_profile)

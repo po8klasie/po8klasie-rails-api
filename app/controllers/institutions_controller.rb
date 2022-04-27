@@ -20,22 +20,21 @@ class InstitutionsController < ApplicationController
       if @class_profiles.size > 1
         @class_profiles_pg_array = "{"
         @class_profiles.each_with_index  do |profile, index|
-          @class_profiles_pg_array += "'" + profile + "'"
           if index != @class_profiles.length - 1
-            @class_profiles_pg_array += ","
+            @class_profiles_pg_array += profile + ","
+          else 
+            @class_profiles_pg_array += profile
           end
         end 
         @class_profiles_pg_array += "}"
       else 
-        @class_profiles_pg_array = "{'" + @class_profiles[0] + "'}"
+        @class_profiles_pg_array = "{" + @class_profiles[0] + "}"
       end
-      debugger
       
       institutions = institutions.joins(subject_sets: :subjects).group(:id).having("ARRAY_AGG(subjects.name::text) @> ?", @class_profiles_pg_array)
     end
 
-    institutions_count = institutions.count
-
+    institutions_count = institutions.count.size
     
     @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
 
@@ -52,7 +51,7 @@ class InstitutionsController < ApplicationController
     institution = Institution.find_by(id: @institution_id)
     render status: :bad_request, json: { message: 'school does not exists' } and return if institution.nil?
 
-    render status: '200', json: institution
+    render status: '200', json: institution.to_json(include: {subject_sets: {include: [:subjects, :subject_set_requirements_info]}})
   end
 
   private
