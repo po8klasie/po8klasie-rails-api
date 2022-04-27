@@ -34,7 +34,11 @@ class InstitutionsController < ApplicationController
       institutions = institutions.joins(subject_sets: :subjects).group(:id).having("ARRAY_AGG(subjects.name::text) @> ?", @class_profiles_pg_array)
     end
 
-    institutions_count = institutions.count.size
+    if @class_profiles != nil 
+      institutions_count = institutions.count.size
+    else 
+      institutions_count = institutions.count
+    end
     
     @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
 
