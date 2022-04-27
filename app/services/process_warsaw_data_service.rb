@@ -23,7 +23,7 @@ class ProcessWarsawDataService < ApplicationService
                 next
             end
 
-            split_school_subject_data = raw_school_data_piece["Grupa rekrutacyjna/oddział"].split(" ")
+            split_school_subject_data = raw_school_data_piece["Grupa rekrutacyjna/oddział"].split(" ")[2]
             subject_names_array = []
             
             #I know that this looks horrible at a first glance but it's the only way to get 100% coverage
@@ -307,7 +307,7 @@ class ProcessWarsawDataService < ApplicationService
                 raise "There are more than one subjects with the name #{subject_name}, make sure only one exists in the database"
               end
   
-              subject_set.subjects << subject
+              subject_set.subjects << subject.first
             end
 
             subject_set_requirements_info = SubjectSetRequirementsInfo.new(subject_set_id: subject_set.id)

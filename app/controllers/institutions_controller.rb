@@ -17,13 +17,21 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities) unless @extracurricular_activities.nil?
 
     if @class_profiles != nil 
-      institutions = institutions.where(:subject_set => { 
-        where: { 
-          :subject => { 
-            where: { name: @class_profiles }  
-          } 
-         } 
-       })
+      if @class_profiles.size > 1
+        @class_profiles_pg_array = "{"
+        @class_profiles.each_with_index  do |profile, index|
+          @class_profiles_pg_array += "'" + profile + "'"
+          if index != @class_profiles.length - 1
+            @class_profiles_pg_array += ","
+          end
+        end 
+        @class_profiles_pg_array += "}"
+      else 
+        @class_profiles_pg_array = "{'" + @class_profiles[0] + "'}"
+      end
+      debugger
+      
+      institutions = institutions.joins(subject_sets: :subjects).group(:id).having("ARRAY_AGG(subjects.name::text) @> ?", @class_profiles_pg_array)
     end
 
     institutions_count = institutions.count
