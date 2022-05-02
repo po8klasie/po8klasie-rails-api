@@ -115,15 +115,15 @@ class InstitutionsController < ApplicationController
   end
 
   def get_class_profiles_pg_array(class_profiles)
-    case class_profiles.size
-      when > 1 
-        class_profiles_pg_array = class_profiles_pg_array_from_class_profiles(class_profiles)
-      when 1
-        class_profiles_pg_array = class_profiles_pg_array_from_single_class_profiles(class_profiles)
-      end
+    size = class_profiles.size
 
-      return class_profiles_pg_array
+    if size > 1 
+      class_profiles_pg_array = class_profiles_pg_array_from_class_profiles(class_profiles)
+    elsif size == 1
+      class_profiles_pg_array = class_profiles_pg_array_from_single_class_profiles(class_profiles)
     end
+    
+    return class_profiles_pg_array
   end
 
   def class_profiles_pg_array_from_multiple_class_profiles(class_profiles)
