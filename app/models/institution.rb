@@ -19,18 +19,4 @@ class Institution < ApplicationRecord
   def address
     "#{town} #{street} #{building_no}/#{apartment_no} #{zip_code}"
   end
-
-  def filter_by_subjects_if_present(class_profiles)
-    if class_profiles != nil 
-      if class_profiles.size > 1
-        
-      else 
-        class_profiles_pg_array = "{" + class_profiles[0] + "}"
-      end
-      
-      institutions = institutions.joins(subject_sets: :subjects).group(:id).having("ARRAY_AGG(subjects.name::text) @> ?", class_profiles_pg_array)
-    end 
-
-    
-  end
 end
