@@ -35,8 +35,6 @@ class CreateSubjectsService < ApplicationService
             "Złotnik"
         ]
 
-        subject_names.each do |subject_name|
-            Subject.create(name: subject_name)
-        end
+        subject_names.map { |name| Subject.create(name: name) }
     end
 end
