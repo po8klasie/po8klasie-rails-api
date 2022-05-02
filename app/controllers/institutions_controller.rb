@@ -15,24 +15,7 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_sports(@sports) unless @sports.nil?
     institutions = institutions.search_by_foreign_languages(@foreign_languages) unless @foreign_languages.nil?
     institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities) unless @extracurricular_activities.nil?
-
-    if @class_profiles != nil 
-      if @class_profiles.size > 1
-        @class_profiles_pg_array = "{"
-        @class_profiles.each_with_index  do |profile, index|
-          if index != @class_profiles.length - 1
-            @class_profiles_pg_array += profile + ","
-          else 
-            @class_profiles_pg_array += profile
-          end
-        end 
-        @class_profiles_pg_array += "}"
-      else 
-        @class_profiles_pg_array = "{" + @class_profiles[0] + "}"
-      end
-      
-      institutions = institutions.joins(subject_sets: :subjects).group(:id).having("ARRAY_AGG(subjects.name::text) @> ?", @class_profiles_pg_array)
-    end
+    institutions = filter_by_subjects_if_present(@class_profiles, institutions)
 
     if @class_profiles != nil 
       institutions_count = institutions.count.size
@@ -118,5 +101,44 @@ class InstitutionsController < ApplicationController
     if @extracurricular_activities.nil? == false
       @extracurricular_activities = @extracurricular_activities.gsub(',', ' ')
     end
+  end
+
+  def filter_by_subjects_if_present(class_profiles, institutions)
+    case class_profiles
+      when nil 
+        return institutions
+      when Array 
+        class_profiles_pg_array = get_class_profiles_pg_array(class_profiles)
+        
+        return institutions.filter_by_subjects(class_profiles_pg_array)
+    end
+  end
+
+  def get_class_profiles_pg_array(class_profiles)
+    case class_profiles.size
+      when > 1 
+        class_profiles_pg_array = class_profiles_pg_array_from_class_profiles(class_profiles)
+      when 1
+        class_profiles_pg_array = class_profiles_pg_array_from_single_class_profiles(class_profiles)
+      end
+
+      return class_profiles_pg_array
+    end
+  end
+
+  def class_profiles_pg_array_from_multiple_class_profiles(class_profiles)
+    class_profiles_pg_array = "{"
+    class_profiles.each_with_index  do |profile, index|
+      if index != class_profiles.length - 1
+        class_profiles_pg_array += profile + ","
+      else 
+        class_profiles_pg_array += profile
+      end
+    end 
+    class_profiles_pg_array += "}"
+  end
+
+  def class_profiles_pg_array_from_single_class_profiles(class_profiles)
+    class_profiles_pg_array = "{" + class_profiles[0] + "}"
   end
 end
