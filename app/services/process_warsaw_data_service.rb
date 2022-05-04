@@ -10,7 +10,7 @@ class ProcessWarsawDataService < ApplicationService
         #    "Maksimum": "179,70",
         #    "Średnia": "164,09"
         #}
-        raw_school_data = JSON.parse(File.read(Rails.root.join('data', 'punkty_warszawa.json')))       
+        raw_school_data = get_raw_school_data() 
 
         raw_school_data.each do |raw_school_data_piece|
             institution_name = raw_school_data_piece.fetch("Nazwa szkoły")
@@ -316,5 +316,9 @@ class ProcessWarsawDataService < ApplicationService
             subject_set_requirements_info.average_points = raw_school_data_piece["Średnia"].to_f
             subject_set_requirements_info.save
         end
+    end
+
+    def get_raw_school_data 
+        return JSON.parse(File.read(Rails.root.join('data', 'punkty_warszawa.json')))    
     end
 end
