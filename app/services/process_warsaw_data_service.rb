@@ -34,16 +34,21 @@ class ProcessWarsawDataService < ApplicationService
 
             subject_set = SubjectSet.create(institution_id: institution.first.id) 
   
+            
             subject_names_array.each do |subject_name|
-              subject = Subject.where(name: subject_name)
+                #We are sure that all the subject names present in this array are in the database
+                subject = Subject.where(name: subject_name)
   
-              if subject.empty?
-                raise "The subject #{subject_name} does not exist in the database, make sure that subjects have been populated"
-              elsif subject.count > 1
-                raise "There are more than one subjects with the name #{subject_name}, make sure only one exists in the database"
-              end
+                # we have to check that the subject is present in the database
+                if subject.empty?
+                    raise "The subject #{subject_name} does not exist in the database, make sure that subjects have been populated"
+                # or that there isn't more than one subject with the same name
+                elsif subject.count > 1
+                    raise "There are more than one subjects with the name #{subject_name}, make sure only one exists in the database"
+                end
   
-              subject_set.subjects << subject.first
+                #The subject variable is an active record relation that we know contains only one record
+                subject_set.subjects << subject.first
             end
 
             subject_set_requirements_info = SubjectSetRequirementsInfo.new(subject_set_id: subject_set.id)
@@ -60,7 +65,7 @@ class ProcessWarsawDataService < ApplicationService
 
     def subject_names_array_from_raw_shool_subject_list(split_school_subject_data)
         subject_names_array = []
-        
+
         case split_school_subject_data
             when "fiz-ang-mat"
                 subject_names_array = ["Fizyka", "Angielski", "Matematyka"]
