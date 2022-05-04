@@ -51,11 +51,7 @@ class ProcessWarsawDataService < ApplicationService
                 subject_set.subjects << subject.first
             end
 
-            subject_set_requirements_info = SubjectSetRequirementsInfo.new(subject_set_id: subject_set.id)
-            subject_set_requirements_info.min_points = raw_school_data_piece["Minimum"].to_f 
-            subject_set_requirements_info.max_points = raw_school_data_piece["Maksimum"].to_f
-            subject_set_requirements_info.average_points = raw_school_data_piece["Średnia"].to_f
-            subject_set_requirements_info.save
+            WarsawCreateSubjectSetRequirementInfoService.new.call(raw_school_data_piece, subject_set) 
         end
     end
 
