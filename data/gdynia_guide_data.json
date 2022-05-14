@@ -1,0 +1,170 @@
+[
+    {
+        "nazwa": "I Akademickie Liceum Ogólnokształcące im. Zasłużonych Ludzi Morza",
+        "ulica": "Narcyzowa",
+        "nr_budynku": "6",
+        "kod_pocztowy": "81-653",
+        "nr_telefonu": "58 664 82 36",
+        "strona_internetowa": "https://www.1alo.org",
+        "email": "sekretarait@ialo.edu.gdynia.pl",
+        "strona_rekrutacji": "http://bityl.pl/LHiWg",
+        "klasy": [
+            {
+                "nazwa": "Matematyczno-Fizyczno-Informatyczna",
+                "opis": "Klasa dla uczniów uzdolnionych matematycznie, zainteresowanych połączeniem matematyki z informatyką. Patronat Politechniki Gdańskiej – Wydziału Elektroniki, Telekomunikacji i Informatyki oraz Uniwersytetu Morskiego – Wydziału Elektrycznego. Warsztaty ćwiczeniowe z fizyki są realizowane w laboratoriach uniwersyteckich. Kurs programowania C++, kurs programowania gier w środowisku Unity. Udział w spotkaniach z elektroniką, telekomunikacją i automatyką na Wydziale Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej. Profil przygotowuje do studiów politechnicznych i ścisłych kierunków uniwersyteckich",
+                "przedmioty_punktowane": [
+                    "matematyka",
+                    "fizyka",
+                    "język polski",
+                    "język angielski"
+                ],
+                "przedmioty_rozszerzone": [
+                    {
+                        "przedmiot": "matematyka"
+                    },
+                    {
+                        "przedmiot": "fizyka"
+                    },
+                    {
+                        "przedmiot": "informatyka"
+                    }
+                ],
+                "języki_obce": {
+                    "obowiązkowe": [
+                        "angielski"
+                    ],
+                    "do_wyboru": [
+                        "niemiecki",
+                        "hiszpański"
+                    ]
+                }
+            },
+            {
+                "nazwa": "Biologiczno-Chemiczno-Matematyczno-Angielska",
+                "opis": "Klasa dla uczniów zainteresowanych naukami przyrodniczymi. Współpraca z uczelniami: Gdańskim Uniwersytetem Medycznym, Uniwersytetem Gdańskim, Międzyuczelnianym Wydziałem Biotechnologii, Politechniką Gdańską, Uniwersytetem Morskim. Warsztaty ćwiczeniowe z biologii i chemii są realizowane w laboratoriach uniwersyteckich. Uczniowie doskonalą swoje umiejętności laboratoryjne podczas realizacji projektu badawczego InnovaBio w Pomorskim Parku Naukowo-Technologicznym. Dodatkowy przedmiot – język angielski medyczny. Uczniowie są przygotowywani do olimpiad m.in. biologicznej, chemicznej, ekologicznej, Wiedzy o Żywności i Żywieniu. Przygotowuje do studiów medycznych, biotechnologicznych, farmaceutycznych oraz z zakresu chemii i biologii.",
+                "przedmioty_punktowane": [
+                    "matematyka",
+                    "chemia",
+                    "język polski",
+                    "bilogia"
+                ],
+                "przedmioty_rozszerzone": [
+                    {
+                        "przedmiot": "biologia"
+                    },
+                    {
+                        "przedmiot": [
+                            "chemia",
+                            "matematyka"
+                        ]
+                    },
+                    {
+                        "przedmiot": "język angielski"
+                    }
+                ],
+                "języki_obce": {
+                    "obowiązkowe": [
+                        "angielski"
+                    ],
+                    "do_wyboru": [
+                        "niemiecki",
+                        "hiszpański"
+                    ]
+                }
+            },
+            {
+                "nazwa": "Polonistyczno-Historyczno-Wiedza o Społeczeństwie-Angielska",
+                "opis": "Klasa dla uczniów zainteresowanych naukami humanistycznymi (od prawa po sztuki audiowizualne). Patronat Uniwersytetu Gdańskiego – Wydziału Nauk Społecznych. Współpraca z Uniwersytetem Gdańskim, Akademią Marynarki Wojennej, Sądem Okręgowym w Gdańsku, Wyższą Szkołą Administracji i Biznesu w Gdyni, Pomorską Izbą Adwokacką w Gdańsku oraz instytucjami kulturalnymi – Centrum Edukacji Filmowej w Warszawie, Gdyńskim Centrum Filmowym, Narodowym Teatrem Edukacji z Wrocławia. Realizacja projektów i warsztatów z zakresu edukacji prawnej i bankowej. Uczniowie są przygotowywani do olimpiad: Literatury i Języka Polskiego, Filozoficznej, Historycznej, Wiedzy o Polsce i Świecie Współczesnym, Przedsiębiorczości. Przygotowuje do studiów prawniczych, humanistycznych, lingwistycznych, filmoznawczych i innych.",
+                "przedmioty_punktowane": [
+                    "matematyka",
+                    "historia",
+                    "język polski",
+                    "język angielski"
+                ],
+                "przedmioty_rozszerzone": [
+                    {
+                        "przedmiot": [
+                            "historia",
+                            "wiedza o społeczeństwie"
+                        ]
+                    },
+                    {
+                        "przedmiot": "język polski"
+                    },
+                    {
+                        "przedmiot": "język angielski"
+                    }
+                ],
+                "języki_obce": {
+                    "obowiązkowe": [
+                        "angielski"
+                    ],
+                    "do_wyboru": [
+                        "niemiecki",
+                        "hiszpański"
+                    ]
+                }
+            },
+            {
+                "nazwa": "Matematyczno-Informatyczno-Angielska",
+                "opis": "Klasa dla uczniów uzdolnionych matematycznie, zainteresowanych połączeniem matematyki z informatyką. Klasa będzie realizowała pierwszy w Polsce profil „Sztuczna Inteligencja”. W programie nauczania m.in. programowanie w języku Python, uczenie maszynowe, sieci neuronowe i deep learning. Nauka będzie odbywać się z wykorzystaniem platformy CyberSkiller. Kursy m.in. programowania gier w środowisku Unity oraz udział w spotkaniach z elektroniką, telekomunikacją i automatyką na Wydziale Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej. Profil przygotowuje do studiów politechnicznych, informatycznych i ścisłych kierunków uniwersyteckich.",
+                "przedmioty_punktowane": [
+                    "matematyka",
+                    "fizyka",
+                    "chemia",
+                    "język angielski"
+                ],
+                "przedmioty_rozszerzone": [
+                    "matematyka",
+                    "język angielski",
+                    "informatyka"
+                ],
+                "języki_obce": {
+                    "obowiązkowe": [
+                        "angielski"
+                    ],
+                    "do_wyboru": [
+                        "niemiecki",
+                        "hiszpański"
+                    ]
+                }
+            },
+            {
+                "nazwa": "Matematyczno-Geograficzno-Angielska",
+                "opis": "Klasa dla uczniów zainteresowanych matematyką, geografią i przedsiębiorczością. Uczniowie będą uczestniczyć w zajęciach na Uniwersytecie Gdańskim, Politechnice Gdańskiej, Instytucie Oceanologii PAN w Sopocie, Instytucie Morskim w Gdańsku, Wyższej Szkole Administracji i Biznesu. Dla uczniów zainteresowanych geografią pobyt w Błękitnej Szkole we Władysławowie. Uczniowie będą realizować w kolejnych latach nauki projekty m.in. „Lekcje w ZUS”, „Bankowcy dla edukacji”. Uczniowie są przygotowywani do olimpiad: przedsiębiorczości, geograficznej i nautologicznej oraz konkursów ekonomicznych i in. Profil przygotowuje do studiów uniwersyteckich i politechnicznych na wielu kierunkach",
+                "przedmioty_punktowane": [
+                    "matematyka",
+                    "geografia",
+                    "język polski",
+                    "język angielski"
+                ],
+                "przedmioty_rozszerzone": [
+                    {
+                        "przedmiot": "matematyka"
+                    },
+                    {
+                        "przedmiot": "język angielski"
+                    },
+                    {
+                        "przedmiot": "geografia"
+                    }
+                ],
+                "języki_obce": {
+                    "obowiązkowe": [
+                        "angielski"
+                    ],
+                    "do_wyboru": [
+                        "niemiecki",
+                        "hiszpański"
+                    ]
+                }
+            }
+        ],
+        "opinie_absolwentów": [
+            {
+                "uczeń_info": "Dawid, uczeń klasy III C",
+                "tekst": "I Akademickie Liceum Ogólnokształcące pozwoliło mi w pełni na rozwój moich zainteresowań w obrębie szkoły. Pełniąc funkcję sekretarza w samorządzie uczniowskim czy też później młodzieżowego radnego miasta z ramienia szkoły, miałem ogromną przyjemność zebrać unikalne doświadczenie oraz wpływać na bieżące życie licealne poprzez podejmowanie własnych inicjatyw bądź zabieraniu głosu w ważnych dla mnie sprawach. Biorąc natomiast udział w różnego rodzaju projektach, olimpiadach czy konkursach zawsze mogłem liczyć na pomoc i poświęcony czas ze strony serdecznie nastawionych nauczycieli. Z całą pewnością mogę stwierdzić, że jest to miejsce poszerzające wiedzę, horyzonty i oferujące uczniom sporo kreatywnej przestrzeni."
+            }
+        ]
+    }
+]
