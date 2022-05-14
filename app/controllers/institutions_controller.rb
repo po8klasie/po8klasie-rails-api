@@ -3,7 +3,7 @@
 # Controller for reading and filering the school
 class InstitutionsController < ApplicationController
   before_action :extract_page_presence, :ensure_page_size_is_positive, :area_query, :name_query, :page_size,
-                :public_school, :school_rspo_type_ids, :class_profiles, :sports, 
+                :public_school, :school_rspo_type_ids, :class_profiles, :sports,
                 :foreign_languages, :extracurricular_activities, only: [:index]
   before_action :institution_id, only: [:show]
   def index
@@ -12,12 +12,17 @@ class InstitutionsController < ApplicationController
     institutions = institutions.search_by_name(@name_query) unless @name_query.nil?
     institutions = institutions.where(rspo_institution_type_id: @school_rspo_type_ids) unless @school_rspo_type_ids.nil?
     institutions = institutions.where(public: @public_school) unless @public_school.nil?
-    institutions = institutions.search_by_class_profiles(@class_profiles) unless @class_profiles.nil?
     institutions = institutions.search_by_sports(@sports) unless @sports.nil?
     institutions = institutions.search_by_foreign_languages(@foreign_languages) unless @foreign_languages.nil?
     institutions = institutions.search_by_extracurricular_activities(@extracurricular_activities) unless @extracurricular_activities.nil?
+    institutions = filter_by_subjects_if_present(@class_profiles, institutions)
+
+    if @class_profiles != nil 
+      institutions_count = institutions.count.size
+    else 
+      institutions_count = institutions.count
+    end
     
-    institutions_count = institutions.count
     @paginated_institutions = institutions.paginate(page: @page, per_page: @page_size)
 
     render status: '200', json: {
@@ -33,7 +38,7 @@ class InstitutionsController < ApplicationController
     institution = Institution.find_by(id: @institution_id)
     render status: :bad_request, json: { message: 'school does not exists' } and return if institution.nil?
 
-    render status: '200', json: institution
+    render status: '200', json: institution.to_json(include: {subject_sets: {include: [:subjects, :subject_set_requirements_info]}})
   end
 
   private
@@ -78,29 +83,62 @@ class InstitutionsController < ApplicationController
 
   def class_profiles
     @class_profiles = params.fetch(:class_profiles, nil)
-    if @class_profiles.nil? == false
-      @class_profiles = @class_profiles.gsub(",", " ")
-    end
+    @class_profiles = @class_profiles.strip.split(",") if @class_profiles.nil? == false
   end
 
   def sports
     @sports = params.fetch(:sports, nil)
-    if @sports.nil?  == false
-      @sports = @sports.gsub(",", " ")
-    end
+    @sports = @sports.gsub(',', ' ') if @sports.nil? == false
   end
 
   def foreign_languages
     @foreign_languages = params.fetch(:foreign_languages, nil)
-    if @foreign_languages.nil?  == false
-      @foreign_languages = @foreign_languages.gsub(",", " ")
-    end
+    @foreign_languages = @foreign_languages.gsub(',', ' ') if @foreign_languages.nil? == false
   end
 
   def extracurricular_activities
     @extracurricular_activities = params.fetch(:extracurricular_activities, nil)
-    if @extracurricular_activities.nil?  == false
-      @extracurricular_activities = @extracurricular_activities.gsub(",", " ")
+    if @extracurricular_activities.nil? == false
+      @extracurricular_activities = @extracurricular_activities.gsub(',', ' ')
     end
+  end
+
+  def filter_by_subjects_if_present(class_profiles, institutions)
+    case class_profiles
+      when nil 
+        return institutions
+      when Array 
+        class_profiles_pg_array = get_class_profiles_pg_array(class_profiles)
+        
+        return institutions.filter_by_subjects(class_profiles_pg_array)
+    end
+  end
+
+  def get_class_profiles_pg_array(class_profiles)
+    size = class_profiles.size
+
+    if size > 1 
+      class_profiles_pg_array = class_profiles_pg_array_from_class_profiles(class_profiles)
+    elsif size == 1
+      class_profiles_pg_array = class_profiles_pg_array_from_single_class_profiles(class_profiles)
+    end
+    
+    return class_profiles_pg_array
+  end
+
+  def class_profiles_pg_array_from_multiple_class_profiles(class_profiles)
+    class_profiles_pg_array = "{"
+    class_profiles.each_with_index  do |profile, index|
+      if index != class_profiles.length - 1
+        class_profiles_pg_array += profile + ","
+      else 
+        class_profiles_pg_array += profile
+      end
+    end 
+    class_profiles_pg_array += "}"
+  end
+
+  def class_profiles_pg_array_from_single_class_profiles(class_profiles)
+    class_profiles_pg_array = "{" + class_profiles[0] + "}"
   end
 end

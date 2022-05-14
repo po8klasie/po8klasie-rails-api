@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_13_120212) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_24_081412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pgcrypto"
@@ -80,9 +80,40 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_120212) do
     t.string "description"
     t.string "sports"
     t.string "foreign_languages"
-    t.string "class_profiles"
     t.string "extracurricular_activities"
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
+  end
+
+  create_table "subject_set_requirements_infos", force: :cascade do |t|
+    t.bigint "subject_set_id"
+    t.float "min_points"
+    t.float "max_points"
+    t.float "average_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_set_id"], name: "index_subject_set_requirements_infos_on_subject_set_id"
+  end
+
+  create_table "subject_sets", force: :cascade do |t|
+    t.bigint "institution_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["institution_id"], name: "index_subject_sets_on_institution_id"
+  end
+
+  create_table "subject_sets_subjects", id: false, force: :cascade do |t|
+    t.bigint "subject_set_id"
+    t.bigint "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_subject_sets_subjects_on_subject_id"
+    t.index ["subject_set_id"], name: "index_subject_sets_subjects_on_subject_set_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
