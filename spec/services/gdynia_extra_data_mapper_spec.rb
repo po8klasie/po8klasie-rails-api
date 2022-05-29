@@ -64,7 +64,6 @@ RSpec.describe 'GdyniaExtraDataMapper', type: :service do
       expect(institution_from_database.description).to eq('Opis szkoły')
       expect(institution_from_database.sports).to eq('koszykówka,piłka nożna')
       expect(institution_from_database.foreign_languages).to eq('angielski,niemiecki')
-      expect(institution_from_database.class_profiles).to eq('matematyczny,fizyczny')
       expect(institution_from_database.extracurricular_activities).to eq('klub turystyczny,matematyka')
     end
   end
