@@ -1,3 +1,13 @@
+# This repository has been archived.
+
+Repository contents won't be updated and issues/discussions won't be monitored.
+
+We decided to continue to develop po8klasie respectively in:
+* [web-frontend repo](https://github.com/po8klasie/web-frontend)
+* [po8klasie-fastapi repo](https://github.com/po8klasie-fastapi)
+
+---
+
 # po8klasie-rails-api
 
 This repository contains the backend code for [po8klasie.pl](https://po8klasie.pl) written in Ruby on Rails. 
